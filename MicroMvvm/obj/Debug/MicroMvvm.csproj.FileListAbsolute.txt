@@ -1,0 +1,5 @@
+C:\Users\Costas\Desktop\MvvmExample\MvvmExample\MicroMvvm\bin\Debug\MicroMvvm.dll
+C:\Users\Costas\Desktop\MvvmExample\MvvmExample\MicroMvvm\bin\Debug\MicroMvvm.pdb
+C:\Users\Costas\Desktop\MvvmExample\MvvmExample\MicroMvvm\obj\Debug\MicroMvvm.csprojResolveAssemblyReference.cache
+C:\Users\Costas\Desktop\MvvmExample\MvvmExample\MicroMvvm\obj\Debug\MicroMvvm.dll
+C:\Users\Costas\Desktop\MvvmExample\MvvmExample\MicroMvvm\obj\Debug\MicroMvvm.pdb

@@ -1,0 +1,17 @@
+c:\users\costas\documents\visual studio 2012\Projects\WordCloud\WordCloud\bin\Debug\WordCloud.exe.config
+c:\users\costas\documents\visual studio 2012\Projects\WordCloud\WordCloud\bin\Debug\WordCloud.exe
+c:\users\costas\documents\visual studio 2012\Projects\WordCloud\WordCloud\bin\Debug\WordCloud.pdb
+c:\users\costas\documents\visual studio 2012\Projects\WordCloud\WordCloud\obj\Debug\WordCloud.csprojResolveAssemblyReference.cache
+c:\users\costas\documents\visual studio 2012\Projects\WordCloud\WordCloud\obj\Debug\MainWindow.baml
+c:\users\costas\documents\visual studio 2012\Projects\WordCloud\WordCloud\obj\Debug\MainWindow.g.cs
+c:\users\costas\documents\visual studio 2012\Projects\WordCloud\WordCloud\obj\Debug\App.g.cs
+c:\users\costas\documents\visual studio 2012\Projects\WordCloud\WordCloud\obj\Debug\WordCloud_MarkupCompile.cache
+c:\users\costas\documents\visual studio 2012\Projects\WordCloud\WordCloud\obj\Debug\WordCloud.g.resources
+c:\users\costas\documents\visual studio 2012\Projects\WordCloud\WordCloud\obj\Debug\WordCloud.Properties.Resources.resources
+c:\users\costas\documents\visual studio 2012\Projects\WordCloud\WordCloud\obj\Debug\WordCloud.csproj.GenerateResource.Cache
+c:\users\costas\documents\visual studio 2012\Projects\WordCloud\WordCloud\obj\Debug\WordCloud.exe
+c:\users\costas\documents\visual studio 2012\Projects\WordCloud\WordCloud\obj\Debug\WordCloud.pdb
+C:\Users\Costas\documents\visual studio 2012\Projects\WordCloud\WordCloud\bin\Debug\MicroMvvm.dll
+C:\Users\Costas\documents\visual studio 2012\Projects\WordCloud\WordCloud\bin\Debug\MicroMvvm.pdb
+C:\Users\Costas\documents\visual studio 2012\Projects\WordCloud\WordCloud\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\Costas\documents\visual studio 2012\Projects\WordCloud\WordCloud\obj\Debug\WordCloud_MarkupCompile.lref

@@ -1,0 +1,19 @@
+﻿<Window x:Name="WordCloud" x:Class="WordCloud.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:WordCloud"
+        Title="WorldCloud" MinHeight="481.343" MinWidth="808.582"  SizeToContent="WidthAndHeight" WindowStyle="ThreeDBorderWindow">
+    <Window.DataContext>
+        <!-- Declaratively create an instance of our Album View Model-->
+        <local:ProjectViewModel/>
+    </Window.DataContext>
+    <Window.Effect>
+        <DropShadowEffect/>
+    </Window.Effect>
+    <Grid>
+        <Label Grid.Column="0" Grid.Row="1" Content="Path:" />
+        <Label Grid.Column="1" Grid.Row="1" Content="{Binding FullPath}" />
+        <Button Width="88" Height="32" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="310,18,0,0" Content="Browse" Command="{Binding  GetPath}">
+        </Button>
+    </Grid>
+</Window>
