@@ -2,7 +2,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:WordCloud"
-        Title="WorldCloud" MinHeight="481.343" MinWidth="808.582"  SizeToContent="WidthAndHeight" WindowStyle="ThreeDBorderWindow">
+        Title="WorldCloud"   WindowStyle="ThreeDBorderWindow" ResizeMode="NoResize" >
     <Window.DataContext>
         <!-- Declaratively create an instance of our Album View Model-->
         <local:ProjectViewModel/>
@@ -10,10 +10,37 @@
     <Window.Effect>
         <DropShadowEffect/>
     </Window.Effect>
-    <Grid>
-        <Label Grid.Column="0" Grid.Row="1" Content="Path:" />
-        <Label Grid.Column="1" Grid.Row="1" Content="{Binding FullPath}" />
-        <Button Width="88" Height="32" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="310,18,0,0" Content="Browse" Command="{Binding  GetPath}">
-        </Button>
+    <Grid HorizontalAlignment="Stretch" >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="285*"></ColumnDefinition>
+            <ColumnDefinition Width="757*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0" Margin="3,3,0,3" Background="LightYellow" ShowGridLines="True" HorizontalAlignment="Left" Width="280">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="300"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" Margin="3,3,3,3" Background="Azure" ShowGridLines="True" Height="50" VerticalAlignment="Top">
+                <Label Grid.Column="0" Content="Path:" Margin="0,8,0,10" />
+                <Label Content="{Binding FullPath}" Margin="32,8,0,10" />
+                <Button Width="88" HorizontalAlignment="Left" Margin="186,5,0,0" Content="Browse" Command="{Binding  GetPath}" Height="32" VerticalAlignment="Top" RenderTransformOrigin="-0.045,0.438"/>
+            </Grid>
+            <Grid Grid.Row="1" Margin="3,3" Background="Aquamarine" ShowGridLines="True" VerticalAlignment="Bottom">
+                <Button Width="88" HorizontalAlignment="Stretch" Content="Generate" Command="{Binding  StartWordCloud}" Height="32" VerticalAlignment="Top" RenderTransformOrigin="-0.045,0.438"/>
+            </Grid>
+        </Grid>
+
+        <Grid Grid.Column="1" Margin="0,3" Background="BlanchedAlmond"  ShowGridLines="True" HorizontalAlignment="Stretch">
+            <ItemsControl ItemsSource="{Binding Path=Elements}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <Canvas />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                
+            </ItemsControl>
+        </Grid>
+
     </Grid>
 </Window>
