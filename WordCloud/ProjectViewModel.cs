@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
-using System.Windows.Controls;
 using Microsoft.Win32;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,7 +25,7 @@ namespace WordCloud
 
         #region Members
         Project _project = new Project();
-        public List<TextBlock> elements = new List<TextBlock>();
+        public List<Element> elements = new List<Element>();
         #endregion
 
         #region Properties
@@ -49,7 +48,7 @@ namespace WordCloud
             }
         }
 
-        public List<TextBlock> Elements
+        public List<Element> Elements
         {
             get { return elements; }
             set
@@ -75,12 +74,13 @@ namespace WordCloud
 
         void StartWordCloudExecute()
         {
-            List<TextBlock> temp = new List<TextBlock>();
-            TextBlock child = new TextBlock();
-            child.Text = "Hello";
-            temp.Add(child);
+            List<Element> temp = new List<Element>();
+            Element el1 = new Element("assd", 22, 55);
+            Element el2 = new Element("sssss", 55, 22);
+            temp.Add(el1);
+            temp.Add(el2);
             Elements = temp;
-            System.Windows.Forms.MessageBox.Show("My message here");
+            //System.Windows.Forms.MessageBox.Show("My message here");
         }
         bool CanStartWordCloudExecute()
         {

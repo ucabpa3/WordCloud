@@ -33,12 +33,23 @@
 
         <Grid Grid.Column="1" Margin="0,3" Background="BlanchedAlmond"  ShowGridLines="True" HorizontalAlignment="Stretch">
             <ItemsControl ItemsSource="{Binding Path=Elements}">
-                <ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Path=Content}"></TextBlock>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+
+                <ItemsControl.ItemsPanel>                
                     <ItemsPanelTemplate>
                         <Canvas />
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
-                
+                <ItemsControl.ItemContainerStyle>
+                    <Style TargetType="ContentPresenter">
+                        <Setter Property="Canvas.Left" Value="{Binding Path=PosX}" />
+                        <Setter Property="Canvas.Top" Value="{Binding Path=PosY}" />
+                    </Style>
+                </ItemsControl.ItemContainerStyle>
             </ItemsControl>
         </Grid>
 
