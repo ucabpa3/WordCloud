@@ -60,7 +60,7 @@ namespace WordCloud {
         [System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "4.0.0.0")]
         public static void Main() {
-            Cloud.App app = new Cloud.App();
+            WordCloud.App app = new WordCloud.App();
             app.InitializeComponent();
             app.Run();
         }

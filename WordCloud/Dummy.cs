@@ -23,11 +23,10 @@ namespace WordCloud
         #endregion
 
         #region Members
-        List<DummyWords> dummy;
+        public List<DummyWords> dummy;
         #endregion
 
         #region Properties
-
         #endregion
     }
 }

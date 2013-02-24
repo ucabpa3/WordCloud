@@ -74,13 +74,10 @@ namespace WordCloud
 
         void StartWordCloudExecute()
         {
-            List<Element> temp = new List<Element>();
             Dummy t = new Dummy();
-            Element el1 = new Element("assd", 22, 55);
-            Element el2 = new Element("sssss", 55, 22);
-            temp.Add(el1);
-            temp.Add(el2);
-            Elements = temp;
+            Cloud c = new Cloud();
+            c.CreateCloud(t);
+            Elements = c.Holder;
             //System.Windows.Forms.MessageBox.Show("My message here");
         }
         bool CanStartWordCloudExecute()

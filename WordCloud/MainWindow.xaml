@@ -13,29 +13,29 @@
     <Grid HorizontalAlignment="Stretch" >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="285*"></ColumnDefinition>
-            <ColumnDefinition Width="757*"></ColumnDefinition>
+            <ColumnDefinition Width="740*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <Grid Grid.Column="0" Margin="3,3,0,3" Background="LightYellow" ShowGridLines="True" HorizontalAlignment="Left" Width="280">
+        <Grid Grid.Column="0" Margin="3,3,0,3" HorizontalAlignment="Left" Width="280">
             <Grid.RowDefinitions>
                 <RowDefinition Height="300"></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
-            <Grid Grid.Row="0" Margin="3,3,3,3" Background="Azure" ShowGridLines="True" Height="50" VerticalAlignment="Top">
+            <Grid Grid.Row="0" Margin="3,3,3,3"  Height="50" VerticalAlignment="Top">
                 <Label Grid.Column="0" Content="Path:" Margin="0,8,0,10" />
                 <Label Content="{Binding FullPath}" Margin="32,8,0,10" />
                 <Button Width="88" HorizontalAlignment="Left" Margin="186,5,0,0" Content="Browse" Command="{Binding  GetPath}" Height="32" VerticalAlignment="Top" RenderTransformOrigin="-0.045,0.438"/>
             </Grid>
-            <Grid Grid.Row="1" Margin="3,3" Background="Aquamarine" ShowGridLines="True" VerticalAlignment="Bottom">
+            <Grid Grid.Row="1" Margin="3,3"  VerticalAlignment="Bottom">
                 <Button Width="88" HorizontalAlignment="Stretch" Content="Generate" Command="{Binding  StartWordCloud}" Height="32" VerticalAlignment="Top" RenderTransformOrigin="-0.045,0.438"/>
             </Grid>
         </Grid>
 
-        <Grid Grid.Column="1" Margin="0,3" Background="BlanchedAlmond"  ShowGridLines="True" HorizontalAlignment="Stretch">
+        <Grid Grid.Column="1" Margin="0,3"  ShowGridLines="True" HorizontalAlignment="Stretch">
             <ItemsControl ItemsSource="{Binding Path=Elements}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding Path=Content}"></TextBlock>
+                        <TextBlock Text="{Binding Path=Content}" Margin="10" FontSize="{Binding Path=FontSize}"></TextBlock>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
 
@@ -44,7 +44,7 @@
                         <Canvas />
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
-                <ItemsControl.ItemContainerStyle>
+               <ItemsControl.ItemContainerStyle>
                     <Style TargetType="ContentPresenter">
                         <Setter Property="Canvas.Left" Value="{Binding Path=PosX}" />
                         <Setter Property="Canvas.Top" Value="{Binding Path=PosY}" />

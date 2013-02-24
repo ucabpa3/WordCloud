@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-C:\Users\Costas\documents\visual studio 2012\Projects\WordCloud\WordCloud\obj\Debug\
+C:\Users\Costas\documents\visual studio 2012\Projects\WordCloud\WordCloud\obj\Release\
 WordCloud
 none
 false
-DEBUG;TRACE
+TRACE
 C:\Users\Costas\documents\visual studio 2012\Projects\WordCloud\WordCloud\App.xaml
 11151548125
 
-151231513115
-14-800208709
+152121995630
+14-2067490119
 MainWindow.xaml;
 
 True

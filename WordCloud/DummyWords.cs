@@ -22,6 +22,16 @@ namespace WordCloud
         #endregion
 
         #region Properties
+        public string Text
+        {
+            get { return text; }
+            set { text = value; }
+        }
+        public int Occurences
+        {
+            get { return occurences; }
+            set { occurences = value; }
+        } 
         #endregion
     }
 }

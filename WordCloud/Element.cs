@@ -10,9 +10,10 @@ namespace WordCloud
     class Element
     {
         #region Construction
-        public Element(string text, int pX, int pY)
+        public Element(string text, int pX, int pY, int fSize)
         {
             content = text;
+            fontSize = fSize;
             X = pX;
             Y = pY;
         }
@@ -20,6 +21,7 @@ namespace WordCloud
 
         #region Members
         string content;
+        int fontSize;
         int X;
         int Y;
         #endregion
@@ -41,6 +43,12 @@ namespace WordCloud
         {
             get { return Y; }
             set { Y = value; }
+        }
+
+        public int FontSize
+        {
+            get { return fontSize; }
+            set { fontSize = value; }
         }
 
         #endregion
