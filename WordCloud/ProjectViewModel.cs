@@ -75,6 +75,7 @@ namespace WordCloud
         void StartWordCloudExecute()
         {
             List<Element> temp = new List<Element>();
+            Dummy t = new Dummy();
             Element el1 = new Element("assd", 22, 55);
             Element el2 = new Element("sssss", 55, 22);
             temp.Add(el1);
