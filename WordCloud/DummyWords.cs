@@ -9,19 +9,24 @@ namespace WordCloud
     class DummyWords
     {
         #region Construction
+
         public DummyWords(string t, int o)
         {
             text = t;
             occurences = o;
         }
+
         #endregion
 
         #region Members
+
         string text;
         int occurences;
+
         #endregion
 
         #region Properties
+
         public string Text
         {
             get { return text; }
@@ -31,7 +36,8 @@ namespace WordCloud
         {
             get { return occurences; }
             set { occurences = value; }
-        } 
+        }
+
         #endregion
     }
 }

@@ -4,6 +4,7 @@ using System;
 using System.Diagnostics;
 using System.Windows.Input;
 
+
 namespace MicroMvvm
 {
     /// <summary>
@@ -72,6 +73,7 @@ namespace MicroMvvm
 
         public void Execute(Object parameter)
         {
+            
             _execute((T)parameter);
         }
 
@@ -144,6 +146,7 @@ namespace MicroMvvm
 
         public void Execute(Object parameter)
         {
+      
             _execute();
         }
 

@@ -54,7 +54,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Cloud.cs" />
+    <Compile Include="Cloud\Cloud.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -65,7 +65,7 @@
     </Compile>
     <Compile Include="Dummy.cs" />
     <Compile Include="DummyWords.cs" />
-    <Compile Include="Element.cs" />
+    <Compile Include="Cloud\Element.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

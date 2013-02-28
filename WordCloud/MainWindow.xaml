@@ -2,18 +2,22 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:WordCloud"
-        Title="WorldCloud"   WindowStyle="ThreeDBorderWindow" ResizeMode="NoResize" >
+        Title="WorldCloud"   WindowStyle="ThreeDBorderWindow" ResizeMode="CanMinimize" WindowState="Maximized" >
     <Window.DataContext>
-        <!-- Declaratively create an instance of our Album View Model-->
         <local:ProjectViewModel/>
     </Window.DataContext>
     <Window.Effect>
         <DropShadowEffect/>
     </Window.Effect>
+    
     <Grid HorizontalAlignment="Stretch" >
+        <Grid.Resources>
+            
+        </Grid.Resources>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="285*"></ColumnDefinition>
-            <ColumnDefinition Width="740*"></ColumnDefinition>
+            <ColumnDefinition ></ColumnDefinition>
+            <ColumnDefinition ></ColumnDefinition>
+            <ColumnDefinition ></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
         <Grid Grid.Column="0" Margin="3,3,0,3" HorizontalAlignment="Left" Width="280">
@@ -31,24 +35,34 @@
             </Grid>
         </Grid>
 
-        <Grid Grid.Column="1" Margin="0,3"  ShowGridLines="True" HorizontalAlignment="Stretch">
-            <ItemsControl ItemsSource="{Binding Path=Elements}">
+        <Grid Margin="350,3,0,3" x:Name="CanvasContainer"  Width="900" ShowGridLines="True" HorizontalAlignment="Left" Grid.ColumnSpan="3" >
+            <ItemsControl ItemsSource="{Binding Path=Elements}" >          
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding Path=Content}" Margin="10" FontSize="{Binding Path=FontSize}"></TextBlock>
+                        <TextBlock Text="{Binding Path=Content}"  FontFamily="Verdana" Opacity="0.5"  FontSize="{Binding Path=FontSize}"  >
+                                <TextBlock.Foreground>
+                                <SolidColorBrush Color="{Binding Path=Color}"></SolidColorBrush>
+                            </TextBlock.Foreground>
+                            
+                            <TextBlock.InputBindings>
+                                <MouseBinding Command="{Binding DataContext.TextBlockClick,RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type TextBlock}}}" MouseAction="LeftClick" />
+                            </TextBlock.InputBindings>
+                        </TextBlock>
+                        
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
-
+                
                 <ItemsControl.ItemsPanel>                
                     <ItemsPanelTemplate>
-                        <Canvas />
+                        <Canvas ></Canvas>
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
                <ItemsControl.ItemContainerStyle>
-                    <Style TargetType="ContentPresenter">
+                    <Style TargetType="ContentPresenter" >
                         <Setter Property="Canvas.Left" Value="{Binding Path=PosX}" />
                         <Setter Property="Canvas.Top" Value="{Binding Path=PosY}" />
                     </Style>
+
                 </ItemsControl.ItemContainerStyle>
             </ItemsControl>
         </Grid>
