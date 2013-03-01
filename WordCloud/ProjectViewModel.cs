@@ -22,7 +22,7 @@ namespace WordCloud
         ///</summary>
         public ProjectViewModel()
         {
-            
+
         }
         #endregion
 
@@ -53,21 +53,23 @@ namespace WordCloud
 
         public List<Element> Elements
         {
-            get { return elements; 
+            get
+            {
+                return elements;
             }
             set
             {
                 elements = value;
                 RaisePropertyChanged("Elements");
                 System.Diagnostics.Debug.WriteLine(" ");
-                for(int i = 0; i<elements.Count ; i++)
+                for (int i = 0; i < elements.Count; i++)
                 {
-                    System.Diagnostics.Debug.WriteLine(elements[i].Content+" "+elements[i].PosX+ " "+elements[i].PosY+" "+elements[i].LineHeight+" "+elements[i].WordWidth);
+                    System.Diagnostics.Debug.WriteLine(elements[i].Content + " " + elements[i].PosX + " " + elements[i].PosY + " " + elements[i].LineHeight + " " + elements[i].WordWidth);
                 }
-                
+
             }
         }
-       
+
         #endregion
 
         #region Commands
@@ -75,10 +77,10 @@ namespace WordCloud
         {
             var dialog = new System.Windows.Forms.FolderBrowserDialog();
             dialog.ShowNewFolderButton = false;
-            dialog.ShowDialog(); 
+            dialog.ShowDialog();
             FullPath = dialog.SelectedPath;
         }
-        bool CanGetPathExecute() 
+        bool CanGetPathExecute()
         {
             return true;
         }
@@ -89,10 +91,8 @@ namespace WordCloud
             Grid CanvasContainer = win.FindName("CanvasContainer") as Grid;
             Dummy t = new Dummy();
             Cloud c = new Cloud(Convert.ToInt32(CanvasContainer.ActualHeight), Convert.ToInt32(CanvasContainer.ActualWidth));
-            //Cloud c = new Cloud();
             c.CreateCloud(t);
             Elements = c.Holder;
-            //System.Windows.Forms.MessageBox.Show("My message here");
         }
         bool CanStartWordCloudExecute()
         {
@@ -106,7 +106,9 @@ namespace WordCloud
             Point gt = clickedItem.TranslatePoint(new Point(0, 0), container);
             double Y = gt.Y;
             double X = gt.X;
-            System.Windows.Forms.MessageBox.Show(clickedItem.FontSize+" "+clickedItem.Text+" "+X.ToString()+"-"+ (clickedItem.ActualWidth+X).ToString()+" , "+Y.ToString()+"-"+(Y+clickedItem.ActualWidth).ToString());
+            //System.Windows.Forms.MessageBox.Show(clickedItem.FontSize + " " + clickedItem.Text + " " + X.ToString() + "-" + (clickedItem.ActualWidth + X).ToString() + " , " + Y.ToString() + "-" + (Y + clickedItem.ActualWidth).ToString());
+            //System.Windows.Forms.MessageBox.Show(clickedItem.Opacity.ToString());
+            System.Windows.Forms.MessageBox.Show(clickedItem.FontSize.ToString());
         }
         bool CanTextBlockClickExecute()
         {
@@ -114,7 +116,7 @@ namespace WordCloud
         }
 
         public ICommand GetPath { get { return new RelayCommand(GetPathExecute, CanGetPathExecute); } }
-        public ICommand TextBlockClick { get { return new RelayCommand<object>((param)=>this.TextBlockClickExecute(param)); } }
+        public ICommand TextBlockClick { get { return new RelayCommand<object>((param) => this.TextBlockClickExecute(param)); } }
         public ICommand StartWordCloud { get { return new RelayCommand(StartWordCloudExecute, CanStartWordCloudExecute); } }
         #endregion
     }

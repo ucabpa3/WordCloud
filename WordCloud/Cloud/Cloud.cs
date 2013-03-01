@@ -48,42 +48,129 @@ namespace WordCloud
         {
             holder = new List<Element>();
             Random rad = new Random();
-            int first = d.dummy[0].Occurences;
-            int last = d.dummy[d.dummy.Count - 1].Occurences;
-            int diff = first - last;
-            int groups = maxFontSize - minFontSize;
-            int step = d.dummy.Count / groups;
-            int top_words = d.dummy.Count - step * groups;
-
+            int font_groups = maxFontSize - minFontSize;
+            int step = d.dummy.Count / font_groups;
+            int top_words = d.dummy.Count - step * font_groups;
+            int op_groups = step / 3;
+            double op_step;
+            int op_groups_top = step - op_groups * 3;
+            int word_counter = step - op_groups_top;
             int fSize = maxFontSize;
+            double opacity = 1.0;
+            int tw_op_groups = 0;
+            int top_tw_op = 0;
+            int inner_step = word_counter;
+            string color = setColor(rad);
+            int font_step = 1;
+
+            if (step <= 0)
+            {
+                font_groups = d.dummy.Count;
+                font_step = (maxFontSize - minFontSize) / font_groups;
+                op_step = 0;
+            }
+            else
+            {
+                if (op_groups < 10)
+                {
+                    string temp = "0." + (10 / word_counter).ToString();
+                    op_step = Convert.ToDouble(temp);
+                }
+                else
+                {
+                    op_step = 0.1;
+                }
+
+                if (top_words > 2)
+                {
+                    tw_op_groups = top_words / 2;
+                    top_tw_op = top_words - tw_op_groups * 2;
+                }
+            }
             for (int i = 0; i < d.dummy.Count; i++)
             {
-                
-                if (i % step == 0 && i!=0)
+
+                if (top_words > 0)
                 {
-                    fSize = fSize - 1;
+
+                    if (tw_op_groups != 0)
+                    {
+                        if (top_tw_op > 0)
+                        {
+                            top_tw_op--;
+                        }
+                        else if ((top_words % 2 != 0 && top_words > 0) || tw_op_groups == 0)
+                        {
+
+                            opacity -= op_step;
+                        }
+                    }
+                    else
+                    {
+                        opacity -= op_step;
+                    }
+
+                    top_words--;
+                    fSize -= font_step;
+
                 }
+                else if ((i - (d.dummy.Count - step * font_groups)) % step == 0)
+                {
+                    color = setColor(rad);
+                    fSize -= font_step;
+                    if (word_counter > 0)
+                    {
+                        word_counter = step - op_groups_top;
+                        opacity = 1.0;
+                    }
+                    opacity = 1.0;
+                }
+                else
+                {
+                    if (op_groups_top != 0)
+                    {
+                        op_groups_top--;
+                    }
+                    else if (word_counter > 0)
+                    {
+                        word_counter--;
+                        if (word_counter == 0)
+                        {
+                            opacity -= op_step;
+                        }
+                    }
+                }
+                if (step <= 0) { color = setColor(rad); }
+
                 double lineHeight = Math.Ceiling(fSize * fontFamily.LineSpacing + fontFamily.LineSpacing);
                 FormattedText dum = new FormattedText(d.dummy[i].Text,
                                                 System.Globalization.CultureInfo.GetCultureInfo("en-us"),
                                                 FlowDirection.LeftToRight,
-                                                new Typeface("Square721 BT"), fSize, Brushes.Black);
+                                                new Typeface("Verdana"), fSize, Brushes.Black);
+
                 double wordWidth = dum.Width + 10;
                 int x = rad.Next(0, CanvasWidth - Convert.ToInt32(wordWidth));
-                int y = Convert.ToInt32(CanvasHeight / 2 -  lineHeight);
+                int y = Convert.ToInt32(CanvasHeight / 2 -  lineHeight) + rad.Next(-50,50);
 
                 ResolveCollisions(ref x, ref y, ref lineHeight, ref wordWidth);
-                Element el = new Element(d.dummy[i].Text, x, y, fSize, lineHeight, wordWidth);
-                int scR = rad.Next(0, 9);
-                int scG = rad.Next(0, 9);
-                int scB = rad.Next(0, 9);
-                el.Color = "sc# 0." + scR.ToString() + ",0." + scG.ToString() + ",0." + scB.ToString();
+                
+                Element el = new Element(d.dummy[i].Text, x, y, fSize, lineHeight, wordWidth, opacity);
+
+                el.Color = color;
                 holder.Add(el);
 
 
             }
         }
 
+        private string setColor(Random rad) 
+        {
+            int scR = rad.Next(0, 9);
+            int scG = rad.Next(0, 9);
+            int scB = rad.Next(0, 9);
+
+            return "sc# 0." + scR.ToString() + ",0." + scG.ToString() + ",0." + scB.ToString();
+        }
 
         private void ResolveCollisions(ref int x, ref int y, ref  double fontHeight, ref double wordWidth)
         {
@@ -92,12 +179,12 @@ namespace WordCloud
             Random rad = new Random();
             Random d = new Random();
             List<int> prev_x = new List<int>();
+
             prev_x.Add(x);
-            int step = 0;
 
             while (DetectCollisions(ref x, ref y, fontHeight, wordWidth) || x<0 || y<0 || x+Convert.ToInt32(wordWidth)>CanvasWidth || y+Convert.ToInt32(fontHeight) > CanvasHeight)
             {
-                step++;
+
                 if (alt)
                 {
                     x = x + Convert.ToInt32(Math.Ceiling(t * Math.Cos(t)));
@@ -132,58 +219,7 @@ namespace WordCloud
 
             for (int i = 0; i < holder.Count; i++)
             {
-                /*    //Case: current word inserting smaller than the others
-                    //left,right
-                    for (int x1 = x; x1 <= Math.Ceiling(x + wordWidth); x1 += Convert.ToInt32(Math.Ceiling(wordWidth)))
-                    {
-                        for (int y1 = y; y1 <= Math.Ceiling(y + fontHeight); y1++)
-                        {
-                            if (((x1 >= holder[i].PosX) && (x1 <= (holder[i].PosX + holder[i].WordWidth))) && ((y1 >= holder[i].PosY) && (y1 <= (holder[i].LineHeight + holder[i].PosY))))
-                            {
-
-                                return true;
-                            }
-                        }
-                    }
-                    //upper, bottom
-                    for (int x1 = x; x1 <= Math.Ceiling(x + wordWidth); x1++)
-                    {
-                        for (int y1 = y; y1 <= Math.Ceiling(y + fontHeight); y1 += Convert.ToInt32(Math.Ceiling(fontHeight)))
-                        {
-                            if (((x1 >= holder[i].PosX) && (x1 <= (holder[i].PosX + holder[i].WordWidth))) && ((y1 >= holder[i].PosY) && (y1 <= (holder[i].LineHeight + holder[i].PosY))))
-                            {
-
-                                return true;
-                            }
-                        }
-                    }
-                    //Case word inserting smaller than in the holder
-                    //Left, right
-                    for (int x1 = holder[i].PosX; x1 <= Math.Ceiling(holder[i].PosX + holder[i].WordWidth); x1 += Convert.ToInt32(Math.Ceiling(holder[i].WordWidth)))
-                    {
-                        for (int y1 = holder[i].PosY; y1 <= Math.Ceiling(holder[i].PosY + holder[i].LineHeight); y1++)
-                        {
-                            if (((x1 >= x) && (x1 <= (x + wordWidth))) && ((y1 >= y) && (y1 <= (y + fontHeight))))
-                            {
-
-                                return true;
-                            }
-                        }
-                    }
-                    //Upper,bottom
-                    for (int x1 = holder[i].PosX; x1 <= Math.Ceiling(holder[i].PosX + holder[i].WordWidth); x1++)
-                    {
-                        for (int y1 = holder[i].PosY; y1 <= Math.Ceiling(holder[i].PosY + holder[i].LineHeight); y1 += Convert.ToInt32(Math.Ceiling(holder[i].LineHeight)))
-                        {
-                            if (((x1 >= x) && (x1 <= (x + wordWidth))) && ((y1 >= y) && (y1 <= (y + fontHeight))))
-                            {
-
-                                return true;
-                            }
-                        }
-                    }
-
-                    }*/
+                 
                 if (((x >= holder[i].PosX) && (x <= (holder[i].PosX + holder[i].WordWidth))) && ((y >= holder[i].PosY) && (y <= (holder[i].LineHeight + holder[i].PosY))))
                 {
 

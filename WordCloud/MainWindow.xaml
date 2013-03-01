@@ -39,7 +39,8 @@
             <ItemsControl ItemsSource="{Binding Path=Elements}" >          
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding Path=Content}"  FontFamily="Verdana" Opacity="0.5"  FontSize="{Binding Path=FontSize}"  >
+                        <TextBlock Text="{Binding Path=Content}"  FontFamily="Verdana" Opacity="{Binding Path=Opacity}"  FontSize="{Binding Path=FontSize}"  >
+                            
                                 <TextBlock.Foreground>
                                 <SolidColorBrush Color="{Binding Path=Color}"></SolidColorBrush>
                             </TextBlock.Foreground>

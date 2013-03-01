@@ -10,7 +10,7 @@ namespace WordCloud
     class Element
     {
         #region Construction
-        public Element(string text, int pX, int pY, int fSize, double line_height, double word_width)
+        public Element(string text, int pX, int pY, int fSize, double line_height, double word_width,double op)
         {
             content = text;
             fontSize = fSize;
@@ -19,6 +19,7 @@ namespace WordCloud
             lineHeight = line_height;
             wordWidth = word_width;
             color = "Black";
+            opacity = op;
         }
         #endregion
 
@@ -30,6 +31,7 @@ namespace WordCloud
         double lineHeight;
         double wordWidth;
         string color;
+        double opacity;
         #endregion
 
         #region Properties
@@ -74,6 +76,13 @@ namespace WordCloud
             get { return wordWidth; }
             set { wordWidth = value; }
         }
+
+        public double Opacity
+        {
+            get { return opacity; }
+            set { opacity = value; }
+        }
+
         #endregion
     }
 }
