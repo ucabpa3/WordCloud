@@ -1,0 +1,5 @@
+C:\Users\MConstantinides\git\WordCloud\Levenshtein\bin\Debug\Levenshtein.dll
+C:\Users\MConstantinides\git\WordCloud\Levenshtein\bin\Debug\Levenshtein.pdb
+C:\Users\MConstantinides\git\WordCloud\Levenshtein\obj\Debug\Levenshtein.csprojResolveAssemblyReference.cache
+C:\Users\MConstantinides\git\WordCloud\Levenshtein\obj\Debug\Levenshtein.dll
+C:\Users\MConstantinides\git\WordCloud\Levenshtein\obj\Debug\Levenshtein.pdb
