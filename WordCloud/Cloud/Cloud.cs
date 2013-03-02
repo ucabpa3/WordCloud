@@ -23,7 +23,7 @@ namespace WordCloud
         {
             fontFamily = new FontFamily("Square721 BT");
             maxFontSize = 61;
-            minFontSize = 55;
+            minFontSize = 10;
             CanvasHeight = CanvasH;
             CanvasWidth = CanvasW;
         }

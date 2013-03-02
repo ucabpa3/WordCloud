@@ -11,6 +11,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Threading.Tasks;
 using MicroMvvm;
+using Levenshtein;
 
 namespace WordCloud
 {
@@ -28,6 +29,8 @@ namespace WordCloud
 
         #region Members
         Project _project = new Project();
+        ToolTip graphToolTip = null;
+        EditDistance ed = new EditDistance();
         public List<Element> elements = new List<Element>();
         #endregion
 
@@ -87,6 +90,7 @@ namespace WordCloud
 
         void StartWordCloudExecute()
         {
+
             Window win = Application.Current.MainWindow;
             Grid CanvasContainer = win.FindName("CanvasContainer") as Grid;
             Dummy t = new Dummy();
@@ -106,10 +110,80 @@ namespace WordCloud
             Point gt = clickedItem.TranslatePoint(new Point(0, 0), container);
             double Y = gt.Y;
             double X = gt.X;
+
+
+            Dummy dummies = new Dummy();
+            List<string> words = new List<string>();
+
+            foreach (DummyWords dw in dummies.dummy)
+            {
+                words.Add(dw.Text);
+            }
+
+
+            //Dictionary<string, int> distances = ed.GetShortestLevenshtein(clickedItem.Text, words);
+
+            StartGraphExecute(clickedItem, ed.GetShortestLevenshtein(clickedItem.Text, words));
+
+            // initToolTip(clickedItem, content);
+
+
             //System.Windows.Forms.MessageBox.Show(clickedItem.FontSize + " " + clickedItem.Text + " " + X.ToString() + "-" + (clickedItem.ActualWidth + X).ToString() + " , " + Y.ToString() + "-" + (Y + clickedItem.ActualWidth).ToString());
             //System.Windows.Forms.MessageBox.Show(clickedItem.Opacity.ToString());
-            System.Windows.Forms.MessageBox.Show(clickedItem.FontSize.ToString());
+            //System.Windows.Forms.MessageBox.Show(clickedItem.FontSize.ToString());
         }
+
+
+
+        void txt_MouseClick(object sender, MouseButtonEventArgs e)
+        {
+
+                MessageBox.Show("click");
+
+        }
+
+        void StartGraphExecute(object clickedItem, Dictionary<string, int> distances)
+        {
+            TextBlock txtClicked = clickedItem as TextBlock;
+            Grid graph = new Grid();
+            graph.Name = txtClicked.Text + "Graph";
+
+            foreach (KeyValuePair<string, int> item in distances)
+            {
+                TextBlock txt = new TextBlock();
+               // txt.MouseDown += new MouseButtonEventHandler(txt_MouseClick);
+                txt.Text = item.Key + " " + item.Value;
+                graph.Children.Add(txt);
+            }
+
+
+
+            graphToolTip = new ToolTip();
+
+            graphToolTip.Content = graph;
+            graphToolTip.IsOpen = true;
+            graphToolTip.Width = 300;
+            graphToolTip.Height = 300;
+            txtClicked.ToolTip = graphToolTip;
+
+
+        }
+
+        void initToolTip(object clickedItem, string content)
+        {
+
+            TextBlock txtBlock = clickedItem as TextBlock;
+
+            graphToolTip = new ToolTip();
+
+            graphToolTip.Content = content;
+            graphToolTip.IsOpen = true;
+            graphToolTip.Width = 300;
+            graphToolTip.Height = 300;
+            txtBlock.ToolTip = graphToolTip;
+
+        }
+
         bool CanTextBlockClickExecute()
         {
             return true;
