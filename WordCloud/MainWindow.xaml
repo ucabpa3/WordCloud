@@ -1,14 +1,23 @@
-﻿<Window x:Name="WordCloud" x:Class="WordCloud.MainWindow"
+﻿<Controls:MetroWindow x:Name="WordCloud" x:Class="WordCloud.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:WordCloud"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         Title="WorldCloud"   WindowStyle="ThreeDBorderWindow" ResizeMode="CanMinimize" WindowState="Maximized" >
-    <Window.DataContext>
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colours.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Controls:MetroWindow.DataContext>
         <local:ProjectViewModel/>
-    </Window.DataContext>
-    <Window.Effect>
-        <DropShadowEffect/>
-    </Window.Effect>
+    </Controls:MetroWindow.DataContext>
 
     <Grid HorizontalAlignment="Stretch" >
         <Grid.Resources>
@@ -73,4 +82,4 @@
         </Grid>
 
     </Grid>
-</Window>
+</Controls:MetroWindow>
