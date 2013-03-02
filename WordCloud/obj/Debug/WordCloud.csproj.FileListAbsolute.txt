@@ -35,3 +35,6 @@ C:\Users\MConstantinides\git\WordCloud\WordCloud\obj\Debug\WordCloud.csproj.Gene
 C:\Users\MConstantinides\git\WordCloud\WordCloud\bin\Debug\Levenshtein.dll
 C:\Users\MConstantinides\git\WordCloud\WordCloud\bin\Debug\Levenshtein.pdb
 C:\Users\MConstantinides\git\WordCloud\WordCloud\obj\Debug\Resources\Icons.baml
+C:\Users\Costas\documents\visual studio 2012\Projects\WordCloud\WordCloud\bin\Debug\Levenshtein.dll
+C:\Users\Costas\documents\visual studio 2012\Projects\WordCloud\WordCloud\bin\Debug\Levenshtein.pdb
+C:\Users\Costas\documents\visual studio 2012\Projects\WordCloud\WordCloud\obj\Debug\Resources\Icons.baml
