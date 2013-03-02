@@ -29,9 +29,10 @@ namespace WordCloud
 
         #region Members
         Project _project = new Project();
-        ToolTip graphToolTip = null;
+
         EditDistance ed = new EditDistance();
         public List<Element> elements = new List<Element>();
+        private TextBlock cached_item = new TextBlock();
         #endregion
 
         #region Properties
@@ -106,10 +107,18 @@ namespace WordCloud
         void TextBlockClickExecute(object parameter)
         {
             TextBlock clickedItem = parameter as TextBlock;
-            UIElement container = Application.Current.MainWindow.FindName("CanvasContainer") as UIElement;
-            Point gt = clickedItem.TranslatePoint(new Point(0, 0), container);
-            double Y = gt.Y;
-            double X = gt.X;
+            if(cached_item.Text != clickedItem.Text && cached_item.Text != "")
+            {
+
+                ToolTip tooltip = cached_item.ToolTip as ToolTip;
+                tooltip.IsOpen = false;
+                
+            }
+            cached_item = clickedItem;
+            //UIElement container = Application.Current.MainWindow.FindName("CanvasContainer") as UIElement;
+            //Point gt = clickedItem.TranslatePoint(new Point(0, 0), container);
+            //double Y = gt.Y;
+            //double X = gt.X;
 
 
             Dummy dummies = new Dummy();
@@ -158,7 +167,7 @@ namespace WordCloud
 
 
 
-            graphToolTip = new ToolTip();
+            ToolTip graphToolTip = new ToolTip();
 
             graphToolTip.Content = graph;
             graphToolTip.IsOpen = true;
@@ -166,21 +175,6 @@ namespace WordCloud
             graphToolTip.Height = 300;
             txtClicked.ToolTip = graphToolTip;
 
-
-        }
-
-        void initToolTip(object clickedItem, string content)
-        {
-
-            TextBlock txtBlock = clickedItem as TextBlock;
-
-            graphToolTip = new ToolTip();
-
-            graphToolTip.Content = content;
-            graphToolTip.IsOpen = true;
-            graphToolTip.Width = 300;
-            graphToolTip.Height = 300;
-            txtBlock.ToolTip = graphToolTip;
 
         }
 
