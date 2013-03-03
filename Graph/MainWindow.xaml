@@ -7,7 +7,6 @@
         Title="GraphSharpDemo" Height="350" Width="525">
     <Window.Resources>
 
-
         <DataTemplate x:Key="demoTemplate" DataType="{x:Type local:PocVertex}">
             <StackPanel Orientation="Horizontal" Margin="5">
                 <TextBlock Text="{Binding Path=word, Mode=OneWay}" Foreground="White">
