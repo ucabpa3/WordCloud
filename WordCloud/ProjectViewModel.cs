@@ -106,76 +106,7 @@ namespace WordCloud
 
         void TextBlockClickExecute(object parameter)
         {
-            TextBlock clickedItem = parameter as TextBlock;
-            if(cached_item.Text != clickedItem.Text && cached_item.Text != "")
-            {
-
-                ToolTip tooltip = cached_item.ToolTip as ToolTip;
-                tooltip.IsOpen = false;
-                
-            }
-            cached_item = clickedItem;
-            //UIElement container = Application.Current.MainWindow.FindName("CanvasContainer") as UIElement;
-            //Point gt = clickedItem.TranslatePoint(new Point(0, 0), container);
-            //double Y = gt.Y;
-            //double X = gt.X;
-
-
-            Dummy dummies = new Dummy();
-            List<string> words = new List<string>();
-
-            foreach (DummyWords dw in dummies.dummy)
-            {
-                words.Add(dw.Text);
-            }
-
-
-            //Dictionary<string, int> distances = ed.GetShortestLevenshtein(clickedItem.Text, words);
-
-            StartGraphExecute(clickedItem, ed.GetShortestLevenshtein(clickedItem.Text, words));
-
-            // initToolTip(clickedItem, content);
-
-
-            //System.Windows.Forms.MessageBox.Show(clickedItem.FontSize + " " + clickedItem.Text + " " + X.ToString() + "-" + (clickedItem.ActualWidth + X).ToString() + " , " + Y.ToString() + "-" + (Y + clickedItem.ActualWidth).ToString());
-            //System.Windows.Forms.MessageBox.Show(clickedItem.Opacity.ToString());
-            //System.Windows.Forms.MessageBox.Show(clickedItem.FontSize.ToString());
-        }
-
-
-
-        void txt_MouseClick(object sender, MouseButtonEventArgs e)
-        {
-
-                MessageBox.Show("click");
-
-        }
-
-        void StartGraphExecute(object clickedItem, Dictionary<string, int> distances)
-        {
-            TextBlock txtClicked = clickedItem as TextBlock;
-            Grid graph = new Grid();
-            graph.Name = txtClicked.Text + "Graph";
-
-            foreach (KeyValuePair<string, int> item in distances)
-            {
-                TextBlock txt = new TextBlock();
-               // txt.MouseDown += new MouseButtonEventHandler(txt_MouseClick);
-                txt.Text = item.Key + " " + item.Value;
-                graph.Children.Add(txt);
-            }
-
-
-
-            ToolTip graphToolTip = new ToolTip();
-
-            graphToolTip.Content = graph;
-            graphToolTip.IsOpen = true;
-            graphToolTip.Width = 300;
-            graphToolTip.Height = 300;
-            txtClicked.ToolTip = graphToolTip;
-
-
+            TextBlock clickedItem = parameter as TextBlock;        
         }
 
         bool CanTextBlockClickExecute()
