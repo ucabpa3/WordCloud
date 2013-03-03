@@ -6,12 +6,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
+using System.Xml;
 using System.Windows.Media;
 using System.Windows;
 using System.Windows.Controls;
 using System.Threading.Tasks;
 using MicroMvvm;
 using Levenshtein;
+using MahApps.Metro.Controls;
 
 namespace WordCloud
 {
@@ -94,10 +96,18 @@ namespace WordCloud
 
             Window win = Application.Current.MainWindow;
             Grid CanvasContainer = win.FindName("CanvasContainer") as Grid;
+
+
+            // ProgressRing pr = win.FindName("WordCloudLoading") as ProgressRing;
+            //  pr.IsActive = true;
+
+
             Dummy t = new Dummy();
             Cloud c = new Cloud(Convert.ToInt32(CanvasContainer.ActualHeight), Convert.ToInt32(CanvasContainer.ActualWidth));
             c.CreateCloud(t);
             Elements = c.Holder;
+
+            //  pr.IsActive = false;
         }
         bool CanStartWordCloudExecute()
         {
@@ -106,11 +116,19 @@ namespace WordCloud
 
         void TextBlockClickExecute(object parameter)
         {
-            TextBlock clickedItem = parameter as TextBlock;        
+            TextBlock clickedItem = parameter as TextBlock;
+
+            /* Switch tab to Graph */
+            Window win = Application.Current.MainWindow;
+            TabItem tab = win.FindName("GraphTab") as TabItem;
+            tab.IsSelected = true;
+
+
         }
 
         bool CanTextBlockClickExecute()
         {
+
             return true;
         }
 
