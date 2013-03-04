@@ -76,6 +76,22 @@ namespace WordCloud
             }
         }
 
+        private int selectedTabNumber;
+        public int SelectedTabNumber
+        {
+            get
+            {
+                return selectedTabNumber;
+            }
+            set
+            {
+                if (selectedTabNumber == value) return;
+                selectedTabNumber = value;
+
+                RaisePropertyChanged("SelectedTabNumber");
+            }
+        }
+
         #endregion
 
         #region Commands
@@ -93,7 +109,7 @@ namespace WordCloud
 
         void StartWordCloudExecute()
         {
-
+            SelectedTabNumber = 1;
             Window win = Application.Current.MainWindow;
             Grid CanvasContainer = win.FindName("CanvasContainer") as Grid;
 
@@ -116,12 +132,13 @@ namespace WordCloud
 
         void TextBlockClickExecute(object parameter)
         {
-            TextBlock clickedItem = parameter as TextBlock;
+            string clickedItem = parameter.ToString();
 
             /* Switch tab to Graph */
-            Window win = Application.Current.MainWindow;
-            TabItem tab = win.FindName("GraphTab") as TabItem;
-            tab.IsSelected = true;
+            SelectedTabNumber = 2;
+            //Window win = Application.Current.MainWindow;
+            //TabItem tab = win.FindName("GraphTab") as TabItem;
+            //tab.IsSelected = true;
 
 
         }
@@ -132,7 +149,7 @@ namespace WordCloud
             return true;
         }
 
-        public ICommand GetPath { get { return new RelayCommand(GetPathExecute, CanGetPathExecute); } }
+        public ICommand GetPath { get { return new RelayCommand(GetPathExecute, () => true); } }
         public ICommand TextBlockClick { get { return new RelayCommand<object>((param) => this.TextBlockClickExecute(param)); } }
         public ICommand StartWordCloud { get { return new RelayCommand(StartWordCloudExecute, CanStartWordCloudExecute); } }
         #endregion

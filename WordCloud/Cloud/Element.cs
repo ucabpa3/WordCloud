@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
+using MicroMvvm;
 
 namespace WordCloud
 {
@@ -32,6 +34,7 @@ namespace WordCloud
         double wordWidth;
         string color;
         double opacity;
+        RelayCommand selectWordCommand;
         #endregion
 
         #region Properties
@@ -81,6 +84,25 @@ namespace WordCloud
         {
             get { return opacity; }
             set { opacity = value; }
+        }
+
+        #endregion
+
+        #region Commands
+
+        private void SelectWord()
+        {
+            MessageBox.Show("Here");
+        }
+
+        public RelayCommand SelectWordCommand
+        {
+            get
+            {
+                if (this.selectWordCommand == null)
+                    this.selectWordCommand = new RelayCommand(this.SelectWord);
+                return this.selectWordCommand;
+            }
         }
 
         #endregion

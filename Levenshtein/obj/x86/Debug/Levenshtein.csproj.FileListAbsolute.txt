@@ -3,3 +3,8 @@ C:\Users\Costas\Documents\Visual Studio 2012\Projects\WordCloud\WordCloud\Levens
 C:\Users\Costas\Documents\Visual Studio 2012\Projects\WordCloud\WordCloud\Levenshtein\obj\x86\Debug\Levenshtein.csprojResolveAssemblyReference.cache
 C:\Users\Costas\Documents\Visual Studio 2012\Projects\WordCloud\WordCloud\Levenshtein\obj\x86\Debug\Levenshtein.dll
 C:\Users\Costas\Documents\Visual Studio 2012\Projects\WordCloud\WordCloud\Levenshtein\obj\x86\Debug\Levenshtein.pdb
+C:\Users\MConstantinides\git\WordCloud\Levenshtein\bin\x86\Debug\Levenshtein.dll
+C:\Users\MConstantinides\git\WordCloud\Levenshtein\bin\x86\Debug\Levenshtein.pdb
+C:\Users\MConstantinides\git\WordCloud\Levenshtein\obj\x86\Debug\Levenshtein.csprojResolveAssemblyReference.cache
+C:\Users\MConstantinides\git\WordCloud\Levenshtein\obj\x86\Debug\Levenshtein.dll
+C:\Users\MConstantinides\git\WordCloud\Levenshtein\obj\x86\Debug\Levenshtein.pdb

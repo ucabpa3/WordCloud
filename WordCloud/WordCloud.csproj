@@ -123,6 +123,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MouseDoubleClickBehavior.cs" />
     <Compile Include="PocGraphLayout.cs" />
     <Compile Include="Project.cs" />
     <Compile Include="ProjectViewModel.cs" />
