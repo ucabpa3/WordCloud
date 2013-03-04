@@ -60,3 +60,8 @@ C:\Users\MConstantinides\git\WordCloud\WordCloud\obj\Debug\WordCloud.Properties.
 C:\Users\MConstantinides\git\WordCloud\WordCloud\obj\Debug\WordCloud.csproj.GenerateResource.Cache
 C:\Users\MConstantinides\git\WordCloud\WordCloud\obj\Debug\WordCloud.exe
 C:\Users\MConstantinides\git\WordCloud\WordCloud\obj\Debug\WordCloud.pdb
+C:\Users\Costas\Documents\Visual Studio 2012\Projects\WordCloud\WordCloud\WordCloud\bin\Debug\GraphSharpDemo.exe
+C:\Users\Costas\Documents\Visual Studio 2012\Projects\WordCloud\WordCloud\WordCloud\bin\Debug\GraphSharp.Controls.dll
+C:\Users\Costas\Documents\Visual Studio 2012\Projects\WordCloud\WordCloud\WordCloud\bin\Debug\QuickGraph.dll
+C:\Users\Costas\Documents\Visual Studio 2012\Projects\WordCloud\WordCloud\WordCloud\bin\Debug\GraphSharp.dll
+C:\Users\Costas\Documents\Visual Studio 2012\Projects\WordCloud\WordCloud\WordCloud\bin\Debug\GraphSharpDemo.pdb
