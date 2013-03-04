@@ -8,3 +8,8 @@ C:\Users\Costas\documents\visual studio 2012\Projects\WordCloud\MicroMvvm\bin\De
 C:\Users\Costas\documents\visual studio 2012\Projects\WordCloud\MicroMvvm\obj\Debug\MicroMvvm.csprojResolveAssemblyReference.cache
 C:\Users\Costas\documents\visual studio 2012\Projects\WordCloud\MicroMvvm\obj\Debug\MicroMvvm.dll
 C:\Users\Costas\documents\visual studio 2012\Projects\WordCloud\MicroMvvm\obj\Debug\MicroMvvm.pdb
+C:\Users\MConstantinides\git\WordCloud\MicroMvvm\bin\Debug\MicroMvvm.dll
+C:\Users\MConstantinides\git\WordCloud\MicroMvvm\bin\Debug\MicroMvvm.pdb
+C:\Users\MConstantinides\git\WordCloud\MicroMvvm\obj\Debug\MicroMvvm.csprojResolveAssemblyReference.cache
+C:\Users\MConstantinides\git\WordCloud\MicroMvvm\obj\Debug\MicroMvvm.dll
+C:\Users\MConstantinides\git\WordCloud\MicroMvvm\obj\Debug\MicroMvvm.pdb

@@ -4,7 +4,9 @@
         xmlns:local="clr-namespace:WordCloud"  
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro" 
         xmlns:graphsharp="clr-namespace:GraphSharp.Controls;assembly=GraphSharp.Controls"
-        xmlns:zoom="clr-namespace:WPFExtensions.Controls;assembly=WPFExtensions"           
+        xmlns:zoom="clr-namespace:WPFExtensions.Controls;assembly=WPFExtensions"      
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:b="clr-namespace:WordCloud"
         Title="WordCloud" WindowStyle="ThreeDBorderWindow" ResizeMode="CanMinimize" WindowState="Maximized" >
     <Window.Resources>
         <ResourceDictionary>
@@ -16,7 +18,7 @@
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
             </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary> 
+        </ResourceDictionary>
     </Window.Resources>
     <Controls:MetroWindow.DataContext>
         <local:ProjectViewModel/>
@@ -39,16 +41,20 @@
                     <MenuItem Header="Generate" Command="{Binding  StartWordCloud}" />
                 </MenuItem>
             </Menu>
-            <TabControl Grid.Row="1">
-                <TabItem x:Name="CloudTab" Header="Cloud">   
+            <TabControl Grid.Row="1" SelectedIndex="{Binding SelectedTabNumber, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+                <TabItem x:Name="WelcomeTab" Header="Welcome"></TabItem>
+                <TabItem x:Name="CloudTab" Header="Cloud">
                     <Grid Margin="10" x:Name="CanvasContainer" HorizontalAlignment="Stretch" >
-                        <Controls:ProgressRing x:Name="WordCloudLoading" IsActive="False" />
+                        <!--<Controls:ProgressRing x:Name="WordCloudLoading" IsActive="True" />-->
                         <Border BorderBrush="LightGray"  BorderThickness="1" CornerRadius="5">
                             <ItemsControl ItemsSource="{Binding Path=Elements}" Margin="-1,-1,1,-1" Height="402" VerticalAlignment="Top" >
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
 
                                         <TextBlock Text="{Binding Path=Content}"  FontFamily="Segoe WP" Opacity="{Binding Path=Opacity}"  FontSize="{Binding Path=FontSize}"  >
+<!--<i:Interaction.Behaviors>
+    <b:MouseDoubleClickBehavior Command="{Binding SelectWordCommand}" />
+</i:Interaction.Behaviors>-->
 
                                             <TextBlock.Effect>
                                                 <DropShadowEffect ShadowDepth="2" Color="Black" Opacity="0.3" RenderingBias="Performance" />
@@ -58,13 +64,13 @@
                                             </TextBlock.Foreground>
 
                                             <TextBlock.InputBindings>
-                                                <MouseBinding Command="{Binding DataContext.TextBlockClick,RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type TextBlock}}}" MouseAction="LeftClick" />
+                                                <MouseBinding Command="{Binding DataContext.TextBlockClick,RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter="{Binding Path=Text,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type TextBlock}}}" MouseAction="LeftClick" />
                                             </TextBlock.InputBindings>
                                         </TextBlock>
 
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
-                                
+
                                 <ItemsControl.ItemsPanel>
                                     <ItemsPanelTemplate>
                                         <Canvas ></Canvas>
@@ -74,94 +80,96 @@
                                     <Style TargetType="ContentPresenter" >
                                         <Setter Property="Canvas.Left" Value="{Binding Path=PosX}" />
                                         <Setter Property="Canvas.Top" Value="{Binding Path=PosY}" />
-                                    </Style>                
-                                </ItemsControl.ItemContainerStyle> 
+                                    </Style>
+                                </ItemsControl.ItemContainerStyle>
                             </ItemsControl>
                         </Border>
                     </Grid>
                 </TabItem>
                 <TabItem x:Name="GraphTab" Header="Graph" >
                     <Border BorderBrush="LightGray" BorderThickness="1" CornerRadius="5">
-                        <Grid Margin="10" x:Name="CanvasGraph" HorizontalAlignment="Stretch">
-                        <Grid.DataContext>
-                            <local:GraphViewModel/>
-                        </Grid.DataContext>
-                        <Grid.Resources>
-                            
-                            <DataTemplate x:Key="demoTemplate" DataType="{x:Type local:PocVertex}">
-                                <StackPanel Orientation="Horizontal" Margin="5">
-                                    <TextBlock Text="{Binding Path=word, Mode=OneWay}" Foreground="White">
-                                        <TextBlock.InputBindings>
-                                            <MouseBinding Command="{Binding DataContext.GraphTextBlockClick,ElementName=CanvasGraph}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type TextBlock}}}" MouseAction="LeftClick" />
-                                            </TextBlock.InputBindings>
-                                    </TextBlock>
-                                </StackPanel>
-                            </DataTemplate>
+                        <Grid Margin="10" x:Name="CanvasGraph" >
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
 
-                            <Style TargetType="{x:Type graphsharp:VertexControl}">
-                                <Setter Property="Template">
-                                    <Setter.Value>
-                                        <ControlTemplate TargetType="{x:Type graphsharp:VertexControl}">
-                                            <Border BorderBrush="White" 
+                            <Grid.DataContext>
+                                <local:GraphViewModel/>
+                            </Grid.DataContext>
+                            <Grid.Resources>
+
+                                <DataTemplate x:Key="demoTemplate" DataType="{x:Type local:PocVertex}">
+                                    <StackPanel Orientation="Horizontal" Margin="5">
+                                        <TextBlock Text="{Binding Path=word, Mode=OneWay}" Foreground="White">
+                                            <TextBlock.InputBindings>
+                                                <MouseBinding Command="{Binding DataContext.GraphTextBlockClick,ElementName=CanvasGraph}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type TextBlock}}}" MouseAction="LeftClick" />
+                                            </TextBlock.InputBindings>
+                                        </TextBlock>
+                                    </StackPanel>
+                                </DataTemplate>
+
+                                <Style TargetType="{x:Type graphsharp:VertexControl}">
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="{x:Type graphsharp:VertexControl}">
+                                                <Border BorderBrush="White" 
                                     Background="Black"
 							        BorderThickness="2"
 							        CornerRadius="10,10,10,10"
 							        Padding="{TemplateBinding Padding}">
 
-                                                <StackPanel Orientation="Vertical">
-                                                    <Grid>
-                                                        <ContentPresenter Content="{TemplateBinding Vertex}" 
+                                                    <StackPanel Orientation="Vertical">
+                                                        <Grid>
+                                                            <ContentPresenter Content="{TemplateBinding Vertex}" 
                                             ContentTemplate="{StaticResource demoTemplate}"/>
-                                                    </Grid>
-                                                </StackPanel>
+                                                        </Grid>
+                                                    </StackPanel>
 
-                                                <Border.Effect>
-                                                    <DropShadowEffect BlurRadius="2" Color="LightGray" 
+                                                    <Border.Effect>
+                                                        <DropShadowEffect BlurRadius="2" Color="LightGray" 
                                     Opacity="0.3" Direction="315"/>
-                                                </Border.Effect>
-                                            </Border>
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                            </Style>
+                                                    </Border.Effect>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
 
-                            <Style TargetType="{x:Type graphsharp:EdgeControl}">
-                                <Style.Resources>
-                                    <ToolTip x:Key="ToolTipContent">
-                                        <StackPanel>
-                                            <TextBlock FontWeight="Bold" Text="{Binding distance}"/>
-                                            <TextBlock Text="{Binding word}"/>
-                                        </StackPanel>
-                                    </ToolTip>
-                                </Style.Resources>
-                                <Setter Property="ToolTip" Value="{StaticResource ToolTipContent}"/>
-                            </Style>
-                        </Grid.Resources>
+                                <Style TargetType="{x:Type graphsharp:EdgeControl}">
+                                    <Style.Resources>
+                                        <ToolTip x:Key="ToolTipContent">
+                                            <StackPanel>
+                                                <TextBlock FontWeight="Bold" Text="{Binding distance}"/>
+                                                <TextBlock Text="{Binding word}"/>
+                                            </StackPanel>
+                                        </ToolTip>
+                                    </Style.Resources>
+                                    <Setter Property="ToolTip" Value="{StaticResource ToolTipContent}"/>
+                                </Style>
+                            </Grid.Resources>
 
-                        
-                            
+
                             <StackPanel Orientation="Vertical" Grid.Row="0" >
                                 <StackPanel Orientation="Horizontal" Background="Black"
-                        HorizontalAlignment="Stretch" Margin="0">
+                                    HorizontalAlignment="Stretch" Margin="0">
                                     <Label VerticalAlignment="Center" VerticalContentAlignment="Center" Foreground="White"
-                        FontSize="10" FontFamily="Verdana" FontWeight="Bold" Margin="0,0,0,0"  
-                        Content="Pick Layout Type"/>
+                                        FontSize="10" FontFamily="Verdana" FontWeight="Bold" Margin="0,0,0,0"  
+                                        Content="Pick Layout Type"/>
                                     <ComboBox ItemsSource="{Binding LayoutAlgorithmTypes}"
-                          SelectedItem="{Binding Path=LayoutAlgorithmType, Mode=TwoWay}"
-                          Width="150" Height="25" Margin="5" />
+                                      SelectedItem="{Binding Path=LayoutAlgorithmType, Mode=TwoWay}"
+                                      Width="150" Height="25" Margin="5" />
                                 </StackPanel>
                             </StackPanel>
 
-                         <zoom:ZoomControl  Grid.Row="1"  Zoom="0.1" ZoomBoxOpacity="0.5" Background="#ff656565">
-                             <local:PocGraphLayout x:Name="graphLayout" Margin="10"
-						Graph="{Binding Path=Graph}"
-						LayoutAlgorithmType="{Binding Path=LayoutAlgorithmType, Mode=OneWay}"
-						OverlapRemovalAlgorithmType="FSA"
-						HighlightAlgorithmType="Simple" />
-                        
+                            <zoom:ZoomControl Grid.Row="1" ZoomBoxOpacity="0.5" Background="#ff656565">
+                                <local:PocGraphLayout x:Name="graphLayout" Margin="10"
+						            Graph="{Binding Path=Graph}"
+						            LayoutAlgorithmType="{Binding Path=LayoutAlgorithmType, Mode=OneWay}"
+						            OverlapRemovalAlgorithmType="FSA"
+						            HighlightAlgorithmType="Simple" />
                             </zoom:ZoomControl>
-                        
-                    </Grid>
+                        </Grid>
                     </Border>
                 </TabItem>
             </TabControl>
