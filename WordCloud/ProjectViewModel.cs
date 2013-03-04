@@ -17,6 +17,7 @@ using MahApps.Metro.Controls;
 
 namespace WordCloud
 {
+
     class ProjectViewModel : ObservableObject
     {
         #region Construction
@@ -31,7 +32,6 @@ namespace WordCloud
 
         #region Members
         Project _project = new Project();
-
         EditDistance ed = new EditDistance();
         public List<Element> elements = new List<Element>();
         private TextBlock cached_item = new TextBlock();
