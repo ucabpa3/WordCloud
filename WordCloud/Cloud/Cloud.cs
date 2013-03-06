@@ -23,8 +23,8 @@ namespace WordCloud
         public Cloud(int CanvasH, int CanvasW)
         {
             fontFamily = new FontFamily("Square721 BT");
-            maxFontSize = 61;
-            minFontSize = 10;
+            maxFontSize = 62;
+            minFontSize = 12;
             CanvasHeight = CanvasH;
             CanvasWidth = CanvasW;
         }
@@ -51,117 +51,68 @@ namespace WordCloud
         {
             holder = new List<Element>();
             Random rad = new Random();
-            int font_groups = maxFontSize - minFontSize;
-            int step = d.Count() / font_groups;
-            int top_words = d.Count - step * font_groups;
-            int op_groups = step / 3;
-            double op_step;
-            int op_groups_top = step - op_groups * 3;
-            int word_counter = step - op_groups_top;
-            int fSize = maxFontSize;
+            bool grouped_by_font = true;
             double opacity = 1.0;
-            int tw_op_groups = 0;
-            int top_tw_op = 0;
-            int inner_step = word_counter;
-            string color = setColor(rad);
             int font_step = 1;
+            int prev_occ = 0;
+            int fontSize = maxFontSize;          
+            int font_groups = maxFontSize - minFontSize;
+            int n_words_in_groups = d.Count / font_groups;
+            int top_words = d.Count - n_words_in_groups * font_groups;
+            string color = setColor(rad);
+            
 
-            if (step <= 0)
+            if (n_words_in_groups < 2)
             {
-                font_groups = d.Count;
-                font_step = (maxFontSize - minFontSize) / font_groups;
-                op_step = 0;
+                top_words = 0;
+                font_step = 5;
+                grouped_by_font = false;
             }
-            else
-            {
-                if (op_groups < 10)
-                {
-                    string temp = "0." + (10 / word_counter).ToString();
-                    op_step = Convert.ToDouble(temp);
-                }
-                else
-                {
-                    op_step = 0.1;
-                }
 
-                if (top_words > 2)
-                {
-                    tw_op_groups = top_words / 2;
-                    top_tw_op = top_words - tw_op_groups * 2;
-                }
-            }
+            
             for (int i = 0; i < d.Count; i++)
             {
-
-                if (top_words > 0)
+                if (grouped_by_font)
                 {
-
-                    if (tw_op_groups != 0)
+                    if (top_words > 0)
                     {
-                        if (top_tw_op > 0)
-                        {
-                            top_tw_op--;
-                        }
-                        else if ((top_words % 2 != 0 && top_words > 0) || tw_op_groups == 0)
-                        {
-
-                            opacity -= op_step;
-                        }
+                        top_words--;                  
+                        if (top_words == 0) { opacity = 1.0; }
                     }
-                    else
+                    else if ((i % n_words_in_groups) == 0 && top_words <= 0)
                     {
-                        opacity -= op_step;
-                    }
-
-                    top_words--;
-                    fSize -= font_step;
-
-                }
-                else if ((i - (d.Count - step * font_groups)) % step == 0)
-                {
-                    color = setColor(rad);
-                    fSize -= font_step;
-                    if (word_counter > 0)
-                    {
-                        word_counter = step - op_groups_top;
+                        color = setColor(rad);
+                        fontSize -= font_step;
                         opacity = 1.0;
                     }
-                    opacity = 1.0;
+                    if (d[i].Count != prev_occ && opacity > 0.1) { opacity -= 0.1; }
                 }
-                else
+                else 
                 {
-                    if (op_groups_top != 0)
+                    if (d[i].Count != prev_occ && fontSize > minFontSize)
                     {
-                        op_groups_top--;
-                    }
-                    else if (word_counter > 0)
-                    {
-                        word_counter--;
-                        if (word_counter == 0)
-                        {
-                            opacity -= op_step;
-                        }
+                        color = setColor(rad);
+                        fontSize -= font_step;
                     }
                 }
-                if (step <= 0) { color = setColor(rad); }
-
-                double lineHeight = Math.Ceiling(fSize * fontFamily.LineSpacing + fontFamily.LineSpacing);
+               
+                double lineHeight = Math.Ceiling(fontSize * fontFamily.LineSpacing + fontFamily.LineSpacing) - 7;
                 FormattedText dum = new FormattedText(d[i].Name,
                                                 System.Globalization.CultureInfo.GetCultureInfo("en-us"),
                                                 FlowDirection.LeftToRight,
-                                                new Typeface("Verdana"), fSize, Brushes.Black);
+                                                new Typeface("Verdana"), fontSize, Brushes.Black);
 
-                double wordWidth = dum.Width + 10;
+                double wordWidth = dum.Width - 7;
                 int x = rad.Next(0, CanvasWidth - Convert.ToInt32(wordWidth));
-                int y = Convert.ToInt32(CanvasHeight / 2 -  lineHeight) + rad.Next(-50,50);
+                int y = Convert.ToInt32(CanvasHeight / 2 -  lineHeight);
 
                 ResolveCollisions(ref x, ref y, ref lineHeight, ref wordWidth);
                 
-                Element el = new Element(d[i].Name, x, y, fSize, lineHeight, wordWidth, opacity);
+                Element el = new Element(d[i].Name, x, y, fontSize, lineHeight, wordWidth, opacity);
 
                 el.Color = color;
                 holder.Add(el);
-
+                prev_occ = d[i].Count;
 
             }
         }
@@ -177,7 +128,7 @@ namespace WordCloud
 
         private void ResolveCollisions(ref int x, ref int y, ref  double fontHeight, ref double wordWidth)
         {
-            double t = 0.1;
+            double t = 0.01;
             bool alt = false;
             Random rad = new Random();
             Random d = new Random();
@@ -213,7 +164,7 @@ namespace WordCloud
                         y = Convert.ToInt32(CanvasHeight / 2 - fontHeight);
                     }
                 }
-                t = t + 0.1;
+                t = t + 0.01;
             }
 
         }
