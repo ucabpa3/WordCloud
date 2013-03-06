@@ -106,6 +106,7 @@
     </Compile>
     <Compile Include="CloudViewModel.cs" />
     <Compile Include="Cloud\Cloud.cs" />
+    <Compile Include="Cloud\CloudGrid.cs" />
     <Compile Include="SizeHelper.cs" />
     <Page Include="CloudTabView.xaml">
       <SubType>Designer</SubType>
