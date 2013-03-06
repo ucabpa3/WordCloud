@@ -1,0 +1,24 @@
+﻿{
+module CommentLexer
+open System
+open Statements
+open Microsoft.FSharp.Text.Lexing
+}
+
+let Separator = ['(' ')' '{' '}' '[' ']' ';' ',' '.']
+let Delimiter = ['=' '>' '<' '!' '~' '?' ':' '+' '-' '*' '/' '&' '|' '^' '%']
+let BLANK = [' ' '\b' '\t' '\\' '\r' '\n'] 
+let Comment	= "/*" | "*/" | "//"
+let Word = [^ '(' ')' '{' '}' '[' ']' ';' ',' '.' '=' '>' '<' '!' '~' '?' ':' '+' '-' '*' '/' '&' '|' '^' '%' ' ' '\b' '\t' '\\' '\r' '\n']
+
+rule tokenize = parse
+| Separator { tokenize lexbuf }
+| Delimiter { tokenize lexbuf }
+
+| BLANK  { tokenize lexbuf }
+
+| Comment { tokenize lexbuf }
+
+| Word* { COMMENTTOKEN(LexBuffer<_>.LexemeString lexbuf) }
+| eof { EOL }
+
