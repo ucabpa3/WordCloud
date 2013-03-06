@@ -24,6 +24,7 @@ type PublicAPI =
                     | IDENTIFIER(name) -> yield new Word(TokenType.Identifier, name, 1)
                     | KEYWORD(name) -> yield new Word(TokenType.Keyword, name, 1)
                     | LITERAL(name) -> yield new Word(TokenType.Literal, name, 1)
+                    | COMMENT(name) -> yield new Word(TokenType.Comment, name, 1)
                     | DONTCARE(name) -> yield null
                     | EOF -> yield null
         ]

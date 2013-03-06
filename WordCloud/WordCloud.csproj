@@ -101,7 +101,20 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CloudTabView.xaml.cs">
+      <DependentUpon>CloudTabView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CloudViewModel.cs" />
     <Compile Include="Cloud\Cloud.cs" />
+    <Compile Include="SizeHelper.cs" />
+    <Page Include="CloudTabView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GraphTabView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -110,9 +123,11 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Dummy.cs" />
-    <Compile Include="DummyWords.cs" />
     <Compile Include="Cloud\Element.cs" />
+    <Compile Include="EditDistance.cs" />
+    <Compile Include="GraphTabView.xaml.cs">
+      <DependentUpon>GraphTabView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GraphViewModel.cs" />
     <Compile Include="Graph\PocEdge.cs" />
     <Compile Include="Graph\PocGraph.cs" />
@@ -155,13 +170,17 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Levenshtein\Levenshtein.csproj">
-      <Project>{04060dc3-745c-4306-9231-1a8e15703f1a}</Project>
-      <Name>Levenshtein</Name>
-    </ProjectReference>
     <ProjectReference Include="..\MicroMvvm\MicroMvvm.csproj">
       <Project>{9efe6cbd-df21-436e-9f81-e258bab0b653}</Project>
       <Name>MicroMvvm</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MicrosoftJava.Shared\MicrosoftJava.Shared.csproj">
+      <Project>{7b51e6ae-6695-45bd-aa26-23855aef6a6a}</Project>
+      <Name>MicrosoftJava.Shared</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MicrosoftJava\MicrosoftJava.fsproj">
+      <Project>{ca7c64d1-47a5-4dfe-a2eb-6a55540b6c16}</Project>
+      <Name>MicrosoftJava</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

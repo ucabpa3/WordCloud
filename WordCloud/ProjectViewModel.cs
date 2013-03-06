@@ -12,8 +12,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Threading.Tasks;
 using MicroMvvm;
-using Levenshtein;
 using MahApps.Metro.Controls;
+using MicrosoftJava.Shared;
 
 namespace WordCloud
 {
@@ -31,10 +31,11 @@ namespace WordCloud
         #endregion
 
         #region Members
+        
         Project _project = new Project();
         EditDistance ed = new EditDistance();
-        public List<Element> elements = new List<Element>();
-        private TextBlock cached_item = new TextBlock();
+        private ObservableCollection<ObservableObject> tabs;
+        
         #endregion
 
         #region Properties
@@ -57,22 +58,27 @@ namespace WordCloud
             }
         }
 
-        public List<Element> Elements
-        {
-            get
-            {
-                return elements;
-            }
-            set
-            {
-                elements = value;
-                RaisePropertyChanged("Elements");
-                System.Diagnostics.Debug.WriteLine(" ");
-                for (int i = 0; i < elements.Count; i++)
-                {
-                    System.Diagnostics.Debug.WriteLine(elements[i].Content + " " + elements[i].PosX + " " + elements[i].PosY + " " + elements[i].LineHeight + " " + elements[i].WordWidth);
+        public ObservableCollection<ObservableObject> Tabs {
+            get {
+                if (this.tabs == null) {
+                    this.tabs = new ObservableCollection<ObservableObject>();
+                    this.tabs.Add(new CloudViewModel(this));
+                    this.tabs.Add(new GraphViewModel(this));
                 }
 
+                return this.tabs;
+            }
+        }
+
+        public CloudViewModel CloudTab {
+            get {
+                return Tabs[0] as CloudViewModel;
+            }
+        }
+
+        public GraphViewModel GraphTab {
+            get {
+                return Tabs[1] as GraphViewModel;
             }
         }
 
@@ -95,6 +101,7 @@ namespace WordCloud
         #endregion
 
         #region Commands
+
         void GetPathExecute()
         {
             var dialog = new System.Windows.Forms.FolderBrowserDialog();
@@ -102,6 +109,7 @@ namespace WordCloud
             dialog.ShowDialog();
             FullPath = dialog.SelectedPath;
         }
+        
         bool CanGetPathExecute()
         {
             return true;
@@ -109,49 +117,20 @@ namespace WordCloud
 
         void StartWordCloudExecute()
         {
-            SelectedTabNumber = 1;
-            Window win = Application.Current.MainWindow;
-            Grid CanvasContainer = win.FindName("CanvasContainer") as Grid;
-
-
-            // ProgressRing pr = win.FindName("WordCloudLoading") as ProgressRing;
-            //  pr.IsActive = true;
-
-
-            Dummy t = new Dummy();
-            Cloud c = new Cloud(Convert.ToInt32(CanvasContainer.ActualHeight), Convert.ToInt32(CanvasContainer.ActualWidth));
-            c.CreateCloud(t);
-            Elements = c.Holder;
+            SelectedTabNumber = 0;
+            (Tabs[0] as CloudViewModel).StartWordCloud();
 
             //  pr.IsActive = false;
         }
+        
         bool CanStartWordCloudExecute()
         {
             return true;
         }
 
-        void TextBlockClickExecute(object parameter)
-        {
-            string clickedItem = parameter.ToString();
-
-            /* Switch tab to Graph */
-            SelectedTabNumber = 2;
-            //Window win = Application.Current.MainWindow;
-            //TabItem tab = win.FindName("GraphTab") as TabItem;
-            //tab.IsSelected = true;
-
-
-        }
-
-        bool CanTextBlockClickExecute()
-        {
-
-            return true;
-        }
-
         public ICommand GetPath { get { return new RelayCommand(GetPathExecute, () => true); } }
-        public ICommand TextBlockClick { get { return new RelayCommand<object>((param) => this.TextBlockClickExecute(param)); } }
         public ICommand StartWordCloud { get { return new RelayCommand(StartWordCloudExecute, CanStartWordCloudExecute); } }
+
         #endregion
     }
 }
