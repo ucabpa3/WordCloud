@@ -50,7 +50,7 @@ namespace WordCloud {
 
             }
         }
-        
+
         public double CanvasHeight { get; set; }
         public double CanvasWidth { get; set; }
 
@@ -70,7 +70,7 @@ namespace WordCloud {
             c.CreateCloud(wordsList);
             Elements = c.Holder;
         }
-        
+
         #endregion
 
         #region Commands

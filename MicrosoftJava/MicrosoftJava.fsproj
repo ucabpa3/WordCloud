@@ -52,10 +52,15 @@
     <FsLex Include="Lexer.fsl">
       <OtherFlags>--unicode</OtherFlags>
     </FsLex>
+    <FsLex Include="CommentLexer.fsl">
+      <OtherFlags>--unicode</OtherFlags>
+    </FsLex>
     <None Include="App.config" />
     <Compile Include="Lexer.fs" />
+    <Compile Include="CommentLexer.fs" />
     <Compile Include="API.fs" />
     <Compile Include="Program.fs" />
+    <None Include="CommentLexer.fsl" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MicrosoftJava.Shared\MicrosoftJava.Shared.csproj">
