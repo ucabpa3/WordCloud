@@ -7,7 +7,8 @@ namespace MicrosoftJava.Shared {
     public enum TokenType {
         Identifier = 1,
         Keyword = 2,
-        Literal = 3
+        Literal = 3,
+        Comment = 4
     }
 
     public class Word {

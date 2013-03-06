@@ -21,6 +21,7 @@ let TAB = ['\t']
 let ESCCHR = ['\\']
 let CR = ['\r']
 let LF = ['\n']
+let AnyButNewLine = [^'\r' '\n']
 
 let OctEscape1 = ESCCHR OctalDigit
 let OctEscape2 = ESCCHR OctalDigit OctalDigit
@@ -32,7 +33,7 @@ let ULetter = Letter
 let Identifier = ULetter (ULetter | Digit)*
 
 let Comment1 = "/*" (AnyButAstr | '*' AnyButSlash)* "*/"
-let Comment2 = "//"_*
+let Comment2 = "//" AnyButNewLine*
 let Comment	= Comment1 | Comment2
 
 let Dimension = "[" ( CR | LF | TAB | BLK | BLANK | Comment )* "]"
@@ -169,15 +170,5 @@ rule tokenize = parse
 | BLK           { tokenize lexbuf }
 | BLANK  { tokenize lexbuf }
 
-| Comment { tokenize lexbuf }
+| Comment { COMMENT(LexBuffer<_>.LexemeString lexbuf) }
 | eof { EOF }
-
-(*
-rule tokenize = parse
-| whitespace { tokenize lexbuf }
-| digit+ { INT (Int32.Parse(LexBuffer<_>.LexemeString lexbuf)) }
-| operator { ops.[LexBuffer<_>.LexemeString lexbuf] }
-| lbrace { LBRACE }
-| rbrace { RBRACE }
-| eof { EOF }
-*)

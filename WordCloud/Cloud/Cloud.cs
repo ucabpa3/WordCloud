@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media;
 using System.Windows;
+using MicrosoftJava.Shared;
 
 namespace WordCloud
 {
@@ -35,22 +36,24 @@ namespace WordCloud
         #endregion
 
         #region Members
+        
         List<Element> holder;
         FontFamily fontFamily;
         int maxFontSize;
         int minFontSize;
         int CanvasHeight;
         int CanvasWidth;
+        
         #endregion
 
         #region Methods
-        public void CreateCloud(Dummy d)
+        public void CreateCloud(List<Word> d)
         {
             holder = new List<Element>();
             Random rad = new Random();
             int font_groups = maxFontSize - minFontSize;
-            int step = d.dummy.Count / font_groups;
-            int top_words = d.dummy.Count - step * font_groups;
+            int step = d.Count() / font_groups;
+            int top_words = d.Count - step * font_groups;
             int op_groups = step / 3;
             double op_step;
             int op_groups_top = step - op_groups * 3;
@@ -65,7 +68,7 @@ namespace WordCloud
 
             if (step <= 0)
             {
-                font_groups = d.dummy.Count;
+                font_groups = d.Count;
                 font_step = (maxFontSize - minFontSize) / font_groups;
                 op_step = 0;
             }
@@ -87,7 +90,7 @@ namespace WordCloud
                     top_tw_op = top_words - tw_op_groups * 2;
                 }
             }
-            for (int i = 0; i < d.dummy.Count; i++)
+            for (int i = 0; i < d.Count; i++)
             {
 
                 if (top_words > 0)
@@ -114,7 +117,7 @@ namespace WordCloud
                     fSize -= font_step;
 
                 }
-                else if ((i - (d.dummy.Count - step * font_groups)) % step == 0)
+                else if ((i - (d.Count - step * font_groups)) % step == 0)
                 {
                     color = setColor(rad);
                     fSize -= font_step;
@@ -143,7 +146,7 @@ namespace WordCloud
                 if (step <= 0) { color = setColor(rad); }
 
                 double lineHeight = Math.Ceiling(fSize * fontFamily.LineSpacing + fontFamily.LineSpacing);
-                FormattedText dum = new FormattedText(d.dummy[i].Text,
+                FormattedText dum = new FormattedText(d[i].Name,
                                                 System.Globalization.CultureInfo.GetCultureInfo("en-us"),
                                                 FlowDirection.LeftToRight,
                                                 new Typeface("Verdana"), fSize, Brushes.Black);
@@ -154,7 +157,7 @@ namespace WordCloud
 
                 ResolveCollisions(ref x, ref y, ref lineHeight, ref wordWidth);
                 
-                Element el = new Element(d.dummy[i].Text, x, y, fSize, lineHeight, wordWidth, opacity);
+                Element el = new Element(d[i].Name, x, y, fSize, lineHeight, wordWidth, opacity);
 
                 el.Color = color;
                 holder.Add(el);

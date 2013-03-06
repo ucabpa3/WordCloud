@@ -9,7 +9,7 @@ using MicroMvvm;
 
 namespace WordCloud
 {
-    class Element
+    internal class Element
     {
         #region Construction
         public Element(string text, int pX, int pY, int fSize, double line_height, double word_width,double op)
@@ -88,23 +88,9 @@ namespace WordCloud
 
         #endregion
 
-        #region Commands
-
-        private void SelectWord()
-        {
-            MessageBox.Show("Here");
-        }
-
-        public RelayCommand SelectWordCommand
-        {
-            get
-            {
-                if (this.selectWordCommand == null)
-                    this.selectWordCommand = new RelayCommand(this.SelectWord);
-                return this.selectWordCommand;
-            }
-        }
-
+        #region Private Methods
+        
         #endregion
+
     }
 }

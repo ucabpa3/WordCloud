@@ -13,31 +13,44 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Threading.Tasks;
 using MicroMvvm;
+using MicrosoftJava.Shared;
 
-namespace WordCloud
-{
-    class GraphViewModel : ObservableObject
-    {
+namespace WordCloud {
+    class GraphViewModel : ObservableObject {
+        #region Members
+
+        private string layoutAlgorithmType;
+        private PocGraph graph = new PocGraph(true);
+        private List<PocVertex> existingVertices = new List<PocVertex>();
+        private List<String> layoutAlgorithmTypes = new List<string>();
+        private ProjectViewModel parent;
+
+        #endregion
 
         #region Constructor
-        public GraphViewModel()
-        {
-            
-            existingVertices.Add(new PocVertex("aaabbbac", 0));
-            existingVertices.Add(new PocVertex("aaabbbacbb", 2));
-            existingVertices.Add(new PocVertex("abbbac", 2));
-            existingVertices.Add(new PocVertex("aaabbb", 2));
+
+        public GraphViewModel(ProjectViewModel parent) {
+            this.parent = parent;
+
+        }
+
+        #endregion 
+
+        #region Private Methods
+
+        public void RunGraph(string startWord, List<Word> wordList) {
+            var qualifiedWords = EditDistance.GetShortestLevenshtein(startWord, wordList.Select(w => w.Name).ToList());
+            foreach(KeyValuePair<string, int> w in qualifiedWords) {
+                existingVertices.Add(new PocVertex(w.Key, w.Value));
+            }
 
             foreach (PocVertex vertex in existingVertices)
                 graph.AddVertex(vertex);
 
-
             //add some edges to the graph
-            AddNewGraphEdge(existingVertices[0], existingVertices[1]);
-            AddNewGraphEdge(existingVertices[0], existingVertices[2]);
-
-            AddNewGraphEdge(existingVertices[0], existingVertices[3]);
-
+            for (int i = 1; i < existingVertices.Count; i++) {
+                AddNewGraphEdge(existingVertices[0], existingVertices[i]);
+            }
 
             //Add Layout Algorithm Types
             layoutAlgorithmTypes.Add("BoundedFR");
@@ -54,18 +67,15 @@ namespace WordCloud
             LayoutAlgorithmType = "Tree";
         }
 
-        #region Data
+        private PocEdge AddNewGraphEdge(PocVertex from, PocVertex to) {
+            string edgeString = string.Format("{0}-{1} Connected", from.word, to.word);
 
-        private string layoutAlgorithmType;
-        private PocGraph graph = new PocGraph(true);
-        private List<PocVertex> existingVertices = new List<PocVertex>();
-        private List<String> layoutAlgorithmTypes = new List<string>();
-        #endregion
+            PocEdge newEdge = new PocEdge(edgeString, from, to);
+            Graph.AddEdge(newEdge);
+            return newEdge;
+        }
 
-
-
-        public void ReLayoutGraph()
-        {
+        public void ReLayoutGraph() {
             //graph = new PocGraph(true);
             //List<PocVertex> existingVertices = new List<PocVertex>();
             //existingVertices.Add(new PocVertex("aaabbbac", 0));
@@ -109,57 +119,44 @@ namespace WordCloud
 
         }
 
-
-
-        #region Private Methods
-        private PocEdge AddNewGraphEdge(PocVertex from, PocVertex to)
-        {
-            string edgeString = string.Format("{0}-{1} Connected", from.word, to.word);
-
-            PocEdge newEdge = new PocEdge(edgeString, from, to);
-            Graph.AddEdge(newEdge);
-            return newEdge;
-        }
-
-
         #endregion
 
         #region Public Properties
 
-        public List<String> LayoutAlgorithmTypes
-        {
+        public string Title {
+            get {
+                return "Graph";
+            }
+        }
+
+
+        public List<String> LayoutAlgorithmTypes {
             get { return layoutAlgorithmTypes; }
         }
 
 
-        public string LayoutAlgorithmType
-        {
+        public string LayoutAlgorithmType {
             get { return layoutAlgorithmType; }
-            set
-            {
+            set {
                 layoutAlgorithmType = value;
                 RaisePropertyChanged("LayoutAlgorithmType");
             }
         }
 
-        public PocGraph Graph
-        {
+        public PocGraph Graph {
             get { return graph; }
-            set
-            {
+            set {
                 graph = value;
                 //RaisePropertyChanged("Graph");
             }
         }
         #endregion
 
-
-
-
         #region Commands
 
-        void GraphTextBlockClickExecute(object parameter)
-        {
+        public ICommand GraphTextBlockClick { get { return new RelayCommand<object>((param) => this.GraphTextBlockClickExecute(param)); } }
+
+        void GraphTextBlockClickExecute(object parameter) {
             TextBlock clickedItem = parameter as TextBlock;
             int pos = 0;
             int prevItemsCount = existingVertices.Count;
@@ -172,10 +169,8 @@ namespace WordCloud
                  {"test3", 2},
             };
 
-            for (int i = 0; i < existingVertices.Count; i++)
-            {
-                if (existingVertices[i].word.Equals(clickedItem.Text))
-                {
+            for (int i = 0; i < existingVertices.Count; i++) {
+                if (existingVertices[i].word.Equals(clickedItem.Text)) {
                     pos = i;
                     break;
                 }
@@ -191,8 +186,7 @@ namespace WordCloud
 
             //add some edges to the graph
 
-            for (int i = 0; i < words.Count; i++)
-            {
+            for (int i = 0; i < words.Count; i++) {
                 AddNewGraphEdge(existingVertices[pos], existingVertices[prevItemsCount + i]);
 
             }
@@ -202,8 +196,5 @@ namespace WordCloud
 
         #endregion
 
-        public ICommand GraphTextBlockClick { get { return new RelayCommand<object>((param) => this.GraphTextBlockClickExecute(param)); } }
-
-        #endregion
     }
 }
