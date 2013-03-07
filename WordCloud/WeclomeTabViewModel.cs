@@ -1,0 +1,108 @@
+﻿using MicroMvvm;
+using MicrosoftJava.Shared;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace WordCloud {
+    internal class WelcomeTabViewModel : ObservableObject {
+        #region Declarations
+
+        private string sourcePath;
+        private TokenType selectedWordType;
+        private int selectedLanguateType;
+
+        private ProjectViewModel parent;
+        private RelayCommand browseSourcePathCommand;
+        private RelayCommand generateCloudCommand;
+
+        #endregion
+
+        #region Initialization
+
+        public WelcomeTabViewModel(ProjectViewModel parent) {
+            this.parent = parent;
+        }
+
+        #endregion
+
+        #region Properties
+
+        public string Title {
+            get {
+                return "Welcome";
+            }
+        }
+
+        public string SourcePath {
+            get {
+                return sourcePath;
+            }
+            set {
+                if (sourcePath != value) {
+                    sourcePath = value;
+                    RaisePropertyChanged("SourcePath");
+                }
+            }
+        }
+
+        public int SelectedWordType {
+            get {
+                return (int)this.selectedWordType;
+            }
+            set {
+                if (this.selectedWordType == (TokenType)value)
+                    return;
+                this.selectedWordType = (TokenType)value;
+
+                RaisePropertyChanged("SelectedWordType");
+            }
+        }
+
+        public int SelectedLanguageType {
+            get {
+                return selectedLanguateType;
+            }
+            set {
+                selectedLanguateType = value;
+            }
+        }
+
+
+        #endregion
+
+        #region Commands
+
+        public RelayCommand BrowseSourcePathCommand {
+            get {
+                if (this.browseSourcePathCommand == null)
+                    this.browseSourcePathCommand = new RelayCommand(this.BrowseSourcePath);
+                return this.browseSourcePathCommand;
+            }
+        }
+
+        private void BrowseSourcePath() {
+            var dialog = new System.Windows.Forms.FolderBrowserDialog();
+            dialog.ShowNewFolderButton = false;
+            dialog.ShowDialog();
+            SourcePath = dialog.SelectedPath;
+        }
+
+        public RelayCommand GenerateCloudCommand {
+            get {
+                if (this.generateCloudCommand == null)
+                    this.generateCloudCommand = new RelayCommand(this.GenerateCloud);
+                return this.generateCloudCommand;
+            }
+        }
+
+        private void GenerateCloud() {
+            parent.SelectedTabNumber = 1;
+            parent.CloudTab.StartWordCloud(SourcePath);
+        }
+
+        #endregion
+    }
+}

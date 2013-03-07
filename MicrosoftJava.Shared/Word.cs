@@ -5,10 +5,10 @@ using System.Text;
 
 namespace MicrosoftJava.Shared {
     public enum TokenType {
-        Identifier = 1,
-        Keyword = 2,
-        Literal = 3,
-        Comment = 4
+        Identifier = 0,
+        Keyword = 1,
+        Literal = 2,
+        Comment = 3
     }
 
     public class Word {

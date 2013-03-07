@@ -15,53 +15,35 @@ using MicroMvvm;
 using MahApps.Metro.Controls;
 using MicrosoftJava.Shared;
 
-namespace WordCloud
-{
+namespace WordCloud {
 
-    class ProjectViewModel : ObservableObject
-    {
+    class ProjectViewModel : ObservableObject {
+
+        #region Declarations
+
+        private ObservableCollection<ObservableObject> tabs;
+        private int selectedTabNumber;
+
+        #endregion
+
         #region Construction
+
         ///<summary>
         ///Constructs default instance of ProjectViewModel
         ///</summary>
-        public ProjectViewModel()
-        {
+        public ProjectViewModel() {
 
         }
-        #endregion
 
-        #region Members
-        
-        Project _project = new Project();
-        EditDistance ed = new EditDistance();
-        private ObservableCollection<ObservableObject> tabs;
-        
         #endregion
 
         #region Properties
-        public Project Path
-        {
-            get { return _project; }
-            set { _project = value; }
-        }
-
-        public string FullPath
-        {
-            get { return Path.FullPath; }
-            set
-            {
-                if (Path.FullPath != value)
-                {
-                    Path.FullPath = value;
-                    RaisePropertyChanged("FullPath");
-                }
-            }
-        }
 
         public ObservableCollection<ObservableObject> Tabs {
             get {
                 if (this.tabs == null) {
                     this.tabs = new ObservableCollection<ObservableObject>();
+                    this.tabs.Add(new WelcomeTabViewModel(this));
                     this.tabs.Add(new CloudViewModel(this));
                     this.tabs.Add(new GraphViewModel(this));
                 }
@@ -72,26 +54,23 @@ namespace WordCloud
 
         public CloudViewModel CloudTab {
             get {
-                return Tabs[0] as CloudViewModel;
+                return Tabs[1] as CloudViewModel;
             }
         }
 
         public GraphViewModel GraphTab {
             get {
-                return Tabs[1] as GraphViewModel;
+                return Tabs[2] as GraphViewModel;
             }
         }
 
-        private int selectedTabNumber;
-        public int SelectedTabNumber
-        {
-            get
-            {
+        public int SelectedTabNumber {
+            get {
                 return selectedTabNumber;
             }
-            set
-            {
-                if (selectedTabNumber == value) return;
+            set {
+                if (selectedTabNumber == value)
+                    return;
                 selectedTabNumber = value;
 
                 RaisePropertyChanged("SelectedTabNumber");
@@ -100,37 +79,5 @@ namespace WordCloud
 
         #endregion
 
-        #region Commands
-
-        void GetPathExecute()
-        {
-            var dialog = new System.Windows.Forms.FolderBrowserDialog();
-            dialog.ShowNewFolderButton = false;
-            dialog.ShowDialog();
-            FullPath = dialog.SelectedPath;
-        }
-        
-        bool CanGetPathExecute()
-        {
-            return true;
-        }
-
-        void StartWordCloudExecute()
-        {
-            SelectedTabNumber = 0;
-            (Tabs[0] as CloudViewModel).StartWordCloud();
-
-            //  pr.IsActive = false;
-        }
-        
-        bool CanStartWordCloudExecute()
-        {
-            return true;
-        }
-
-        public ICommand GetPath { get { return new RelayCommand(GetPathExecute, () => true); } }
-        public ICommand StartWordCloud { get { return new RelayCommand(StartWordCloudExecute, CanStartWordCloudExecute); } }
-
-        #endregion
     }
 }

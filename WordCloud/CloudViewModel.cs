@@ -2,6 +2,7 @@
 using MicrosoftJava.Shared;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -58,8 +59,11 @@ namespace WordCloud {
 
         #region Public Methods
 
-        public void StartWordCloud() {
-            var words = API.PublicAPI.ExtractTokens(@"C:\Projects\SortTest.java").ToList();
+        public void StartWordCloud(string directoryPath) {
+            
+            List<Word> words = new List<Word>();
+            foreach(string fileName in GetFiles(directoryPath))
+                words.AddRange(API.PublicAPI.ExtractTokens(fileName));
 
             var t = from w in words.Where(w => w != null)
                     group w by new { w.Type, w.Name } into g
@@ -69,6 +73,18 @@ namespace WordCloud {
             Cloud c = new Cloud(Convert.ToInt32(CanvasHeight), Convert.ToInt32(CanvasWidth));
             c.CreateCloud(wordsList);
             Elements = c.Holder;
+        }
+
+        private List<string> GetFiles(string directoryPath) {
+            DirectoryInfo d = new DirectoryInfo(directoryPath);
+            List<string> retVal = new List<string>();
+            foreach(DirectoryInfo subD in d.GetDirectories())
+                retVal.AddRange(GetFiles(subD.FullName));
+            foreach(FileInfo file in d.GetFiles()) {
+                if (file.Extension == ".java")
+                    retVal.Add(file.FullName);
+            }
+            return retVal;
         }
 
         #endregion

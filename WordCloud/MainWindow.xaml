@@ -23,42 +23,27 @@
     <Controls:MetroWindow.DataContext>
         <local:ProjectViewModel/>
     </Controls:MetroWindow.DataContext>
-    
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
 
-        <Menu Grid.Row="0">
-            <MenuItem Header="_File">
-                <MenuItem Header="Open" Command="{Binding  GetPath}" />
-                <MenuItem Header="Close" Command="{Binding ApplicationCommands.Exit}" />
-            </MenuItem>
-            <MenuItem Header="_Operations">
-                <MenuItem Header="Parse" />
-                <MenuItem Header="Generate" Command="{Binding  StartWordCloud}" />
-            </MenuItem>
-        </Menu>
+    <Controls:MetroContentControl>
+        <Controls:MetroContentControl.Resources>
+            <DataTemplate DataType="{x:Type local:WelcomeTabViewModel}">
+                <local:WelcomeTabView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type local:CloudViewModel}" >
+                <local:CloudTabView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type local:GraphViewModel}" >
+                <local:GraphTabView />
+            </DataTemplate>
+        </Controls:MetroContentControl.Resources>
 
-        <Controls:MetroContentControl Grid.Row="1">
-            <Controls:MetroContentControl.Resources>
-                <DataTemplate DataType="{x:Type local:CloudViewModel}" >
-                    <local:CloudTabView />
-                </DataTemplate>
-                <DataTemplate DataType="{x:Type local:GraphViewModel}" >
-                    <local:GraphTabView />
-                </DataTemplate>
-            </Controls:MetroContentControl.Resources>
-            
-            <TabControl ItemsSource="{Binding Tabs}" IsSynchronizedWithCurrentItem="True"
+        <TabControl ItemsSource="{Binding Tabs}" IsSynchronizedWithCurrentItem="True"
                 SelectedIndex="{Binding SelectedTabNumber, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
-                <TabControl.ItemContainerStyle>
-                    <Style TargetType="{x:Type TabItem}" BasedOn="{StaticResource {x:Type TabItem}}">
-                        <Setter Property="Header" Value="{Binding Path=Title}" />
-                    </Style>
-                </TabControl.ItemContainerStyle>
-            </TabControl>
-        </Controls:MetroContentControl>
-    </Grid>    
+            <TabControl.ItemContainerStyle>
+                <Style TargetType="{x:Type TabItem}" BasedOn="{StaticResource {x:Type TabItem}}">
+                    <Setter Property="Header" Value="{Binding Path=Title}" />
+                </Style>
+            </TabControl.ItemContainerStyle>
+        </TabControl>
+    </Controls:MetroContentControl>
 </Controls:MetroWindow>
