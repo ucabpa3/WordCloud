@@ -8,6 +8,12 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lib", "Lib", "{6FBDBB8A-DBA8-46EE-86B8-1025C65CA509}"
 	ProjectSection(SolutionItems) = preProject
 		Lib\FSharp.PowerPack.dll = Lib\FSharp.PowerPack.dll
+		Lib\GraphSharp.Contracts.dll = Lib\GraphSharp.Contracts.dll
+		Lib\GraphSharp.Controls.dll = Lib\GraphSharp.Controls.dll
+		Lib\GraphSharp.dll = Lib\GraphSharp.dll
+		Lib\Microsoft.Contracts.dll = Lib\Microsoft.Contracts.dll
+		Lib\QuickGraph.dll = Lib\QuickGraph.dll
+		Lib\WPFExtensions.dll = Lib\WPFExtensions.dll
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicrosoftJava.Shared", "MicrosoftJava.Shared\MicrosoftJava.Shared.csproj", "{7B51E6AE-6695-45BD-AA26-23855AEF6A6A}"

@@ -56,24 +56,24 @@
   <ItemGroup>
     <Reference Include="GraphSharp, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Graph\Lib\GraphSharp.dll</HintPath>
+      <HintPath>..\Lib\GraphSharp.dll</HintPath>
     </Reference>
     <Reference Include="GraphSharp.Contracts">
-      <HintPath>..\Graph\Lib\GraphSharp.Contracts.dll</HintPath>
+      <HintPath>..\Lib\GraphSharp.Contracts.dll</HintPath>
     </Reference>
     <Reference Include="GraphSharp.Controls, Version=1.0.4115.29430, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Graph\Lib\GraphSharp.Controls.dll</HintPath>
+      <HintPath>..\Lib\GraphSharp.Controls.dll</HintPath>
     </Reference>
     <Reference Include="MahApps.Metro">
       <HintPath>..\packages\MahApps.Metro.0.10.0.1\lib\net40\MahApps.Metro.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Contracts">
-      <HintPath>..\Graph\Lib\Microsoft.Contracts.dll</HintPath>
+      <HintPath>..\Lib\Microsoft.Contracts.dll</HintPath>
     </Reference>
     <Reference Include="QuickGraph, Version=3.2.40122.0, Culture=neutral, PublicKeyToken=f3fb40175eec2af3, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Graph\Lib\QuickGraph.dll</HintPath>
+      <HintPath>..\Lib\QuickGraph.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -93,7 +93,7 @@
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="WPFExtensions">
-      <HintPath>..\Graph\Lib\WPFExtensions.dll</HintPath>
+      <HintPath>..\Lib\WPFExtensions.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
