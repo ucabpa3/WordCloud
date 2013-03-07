@@ -1,5 +1,0 @@
-C:\Users\Costas\documents\visual studio 2012\Projects\WordCloud\MicroMvvm\bin\Release\MicroMvvm.dll
-C:\Users\Costas\documents\visual studio 2012\Projects\WordCloud\MicroMvvm\bin\Release\MicroMvvm.pdb
-C:\Users\Costas\documents\visual studio 2012\Projects\WordCloud\MicroMvvm\obj\Release\MicroMvvm.csprojResolveAssemblyReference.cache
-C:\Users\Costas\documents\visual studio 2012\Projects\WordCloud\MicroMvvm\obj\Release\MicroMvvm.dll
-C:\Users\Costas\documents\visual studio 2012\Projects\WordCloud\MicroMvvm\obj\Release\MicroMvvm.pdb
