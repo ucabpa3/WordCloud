@@ -59,7 +59,7 @@ namespace WordCloud {
         #region Public Methods
 
         public void StartWordCloud() {
-            var words = API.PublicAPI.ExtractTokens(@"C:\Projects\HelloWorld.java").ToList();
+            var words = API.PublicAPI.ExtractTokens(@"C:\Users\MConstantinides\Desktop\Quine.java").ToList();
 
             var t = from w in words.Where(w => w != null)
                     group w by new { w.Type, w.Name } into g

@@ -33,14 +33,12 @@ C:\Users\MConstantinides\git\WordCloud\WordCloud\bin\x86\Debug\WordCloud.pdb
 C:\Users\MConstantinides\git\WordCloud\WordCloud\bin\x86\Debug\GraphSharp.Contracts.dll
 C:\Users\MConstantinides\git\WordCloud\WordCloud\bin\x86\Debug\GraphSharp.Controls.dll
 C:\Users\MConstantinides\git\WordCloud\WordCloud\bin\x86\Debug\GraphSharp.dll
-C:\Users\MConstantinides\git\WordCloud\WordCloud\bin\x86\Debug\Levenshtein.dll
 C:\Users\MConstantinides\git\WordCloud\WordCloud\bin\x86\Debug\MahApps.Metro.dll
 C:\Users\MConstantinides\git\WordCloud\WordCloud\bin\x86\Debug\MicroMvvm.dll
 C:\Users\MConstantinides\git\WordCloud\WordCloud\bin\x86\Debug\Microsoft.Contracts.dll
 C:\Users\MConstantinides\git\WordCloud\WordCloud\bin\x86\Debug\QuickGraph.dll
 C:\Users\MConstantinides\git\WordCloud\WordCloud\bin\x86\Debug\System.Windows.Interactivity.dll
 C:\Users\MConstantinides\git\WordCloud\WordCloud\bin\x86\Debug\WPFExtensions.dll
-C:\Users\MConstantinides\git\WordCloud\WordCloud\bin\x86\Debug\Levenshtein.pdb
 C:\Users\MConstantinides\git\WordCloud\WordCloud\bin\x86\Debug\MicroMvvm.pdb
 C:\Users\MConstantinides\git\WordCloud\WordCloud\obj\x86\Debug\WordCloud.csprojResolveAssemblyReference.cache
 C:\Users\MConstantinides\git\WordCloud\WordCloud\obj\x86\Debug\MainWindow.g.cs
@@ -87,3 +85,13 @@ C:\Users\Costas\documents\visual studio 2012\Projects\WordCloud\WordCloud\obj\x8
 C:\Users\Costas\documents\visual studio 2012\Projects\WordCloud\WordCloud\obj\x86\Debug\WordCloud.exe
 C:\Users\Costas\documents\visual studio 2012\Projects\WordCloud\WordCloud\obj\x86\Debug\WordCloud.pdb
 C:\Users\Costas\documents\visual studio 2012\Projects\WordCloud\WordCloud\bin\x86\Debug\MicrosoftJava.xml
+C:\Users\MConstantinides\git\WordCloud\WordCloud\obj\x86\Debug\CloudTabView.g.cs
+C:\Users\MConstantinides\git\WordCloud\WordCloud\obj\x86\Debug\GraphTabView.g.cs
+C:\Users\MConstantinides\git\WordCloud\WordCloud\bin\x86\Debug\MicrosoftJava.exe
+C:\Users\MConstantinides\git\WordCloud\WordCloud\bin\x86\Debug\MicrosoftJava.Shared.dll
+C:\Users\MConstantinides\git\WordCloud\WordCloud\bin\x86\Debug\FSharp.PowerPack.dll
+C:\Users\MConstantinides\git\WordCloud\WordCloud\bin\x86\Debug\MicrosoftJava.Shared.pdb
+C:\Users\MConstantinides\git\WordCloud\WordCloud\bin\x86\Debug\MicrosoftJava.pdb
+C:\Users\MConstantinides\git\WordCloud\WordCloud\bin\x86\Debug\MicrosoftJava.xml
+C:\Users\MConstantinides\git\WordCloud\WordCloud\obj\x86\Debug\CloudTabView.baml
+C:\Users\MConstantinides\git\WordCloud\WordCloud\obj\x86\Debug\GraphTabView.baml
