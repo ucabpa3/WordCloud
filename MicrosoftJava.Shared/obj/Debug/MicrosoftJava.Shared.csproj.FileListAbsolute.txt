@@ -1,5 +1,0 @@
-C:\Users\MConstantinides\git\WordCloud\MicrosoftJava.Shared\bin\Debug\MicrosoftJava.Shared.dll
-C:\Users\MConstantinides\git\WordCloud\MicrosoftJava.Shared\bin\Debug\MicrosoftJava.Shared.pdb
-C:\Users\MConstantinides\git\WordCloud\MicrosoftJava.Shared\obj\Debug\MicrosoftJava.Shared.csprojResolveAssemblyReference.cache
-C:\Users\MConstantinides\git\WordCloud\MicrosoftJava.Shared\obj\Debug\MicrosoftJava.Shared.dll
-C:\Users\MConstantinides\git\WordCloud\MicrosoftJava.Shared\obj\Debug\MicrosoftJava.Shared.pdb
