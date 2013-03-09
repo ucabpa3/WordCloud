@@ -21,4 +21,3 @@ rule tokenize = parse
 
 | Word* { COMMENTTOKEN(LexBuffer<_>.LexemeString lexbuf) }
 | eof { EOL }
-

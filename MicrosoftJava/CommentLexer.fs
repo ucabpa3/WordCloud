@@ -67,6 +67,6 @@ and _fslex_tokenize  _fslex_state lexbuf =
           )
   | _ -> failwith "tokenize"
 
-# 25 "CommentLexer.fsl"
+# 24 "CommentLexer.fsl"
 
 # 3000000 "CommentLexer.fs"

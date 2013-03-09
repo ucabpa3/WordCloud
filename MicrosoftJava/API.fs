@@ -7,13 +7,17 @@ open MicrosoftJava.Shared
 
 
 type PublicAPI =
-    static member ExtractTokens (path:string) =
-        let file = new System.IO.StreamReader(path)
-
-        let lexbuf = Lexing.LexBuffer<char>.FromTextReader file
+    static member ExtractTokens (fileContents:System.IO.StreamReader, lang: TLanguageType) =
+        let lexbuf = Lexing.LexBuffer<char>.FromTextReader fileContents
         let tokens = [
             while not lexbuf.IsPastEndOfStream do
-                let y = Lexer.tokenize lexbuf
+                let y = 
+                    match lang with 
+                        | TLanguageType.Java -> JavaLexer.tokenize lexbuf
+                        | TLanguageType.CSharp -> CSharpLexer.tokenize lexbuf
+                        | TLanguageType.C -> CLexer.tokenize lexbuf
+                        | TLanguageType.CPlusPlus -> CPPLexer.tokenize lexbuf
+                        | _ -> JavaLexer.tokenize lexbuf
                 yield y
                 //printfn "%A" y
             ] 

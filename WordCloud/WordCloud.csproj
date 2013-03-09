@@ -9,10 +9,11 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>WordCloud</RootNamespace>
     <AssemblyName>WordCloud</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -38,7 +39,7 @@
     <OutputPath>bin\x86\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <DebugType>full</DebugType>
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>true</Prefer32Bit>
@@ -56,24 +57,24 @@
   <ItemGroup>
     <Reference Include="GraphSharp, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Graph\Lib\GraphSharp.dll</HintPath>
+      <HintPath>..\Lib\GraphSharp.dll</HintPath>
     </Reference>
     <Reference Include="GraphSharp.Contracts">
-      <HintPath>..\Graph\Lib\GraphSharp.Contracts.dll</HintPath>
+      <HintPath>..\Lib\GraphSharp.Contracts.dll</HintPath>
     </Reference>
     <Reference Include="GraphSharp.Controls, Version=1.0.4115.29430, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Graph\Lib\GraphSharp.Controls.dll</HintPath>
+      <HintPath>..\Lib\GraphSharp.Controls.dll</HintPath>
     </Reference>
     <Reference Include="MahApps.Metro">
       <HintPath>..\packages\MahApps.Metro.0.10.0.1\lib\net40\MahApps.Metro.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Contracts">
-      <HintPath>..\Graph\Lib\Microsoft.Contracts.dll</HintPath>
+      <HintPath>..\Lib\Microsoft.Contracts.dll</HintPath>
     </Reference>
     <Reference Include="QuickGraph, Version=3.2.40122.0, Culture=neutral, PublicKeyToken=f3fb40175eec2af3, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Graph\Lib\QuickGraph.dll</HintPath>
+      <HintPath>..\Lib\QuickGraph.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -93,7 +94,7 @@
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="WPFExtensions">
-      <HintPath>..\Graph\Lib\WPFExtensions.dll</HintPath>
+      <HintPath>..\Lib\WPFExtensions.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -108,6 +109,10 @@
     <Compile Include="Cloud\Cloud.cs" />
     <Compile Include="Cloud\CloudGrid.cs" />
     <Compile Include="SizeHelper.cs" />
+    <Compile Include="WelcomeTabView.xaml.cs">
+      <DependentUpon>WelcomeTabView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WeclomeTabViewModel.cs" />
     <Page Include="CloudTabView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -137,11 +142,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="WelcomeTabView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MouseDoubleClickBehavior.cs" />
     <Compile Include="PocGraphLayout.cs" />
-    <Compile Include="Project.cs" />
     <Compile Include="ProjectViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
