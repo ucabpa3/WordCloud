@@ -40,6 +40,9 @@ namespace WordCloud {
                 }
             }
 
+            /* Remove givenWord from the output */
+            dists.Remove(dists.ElementAt(0).Key);
+
             return dists;
 
         }
