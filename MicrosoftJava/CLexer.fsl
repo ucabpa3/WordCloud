@@ -1,0 +1,174 @@
+{
+module CLexer
+open System
+open Statements
+open Microsoft.FSharp.Text.Lexing
+}
+
+let Separator = ['(' ')' '{' '}' '[' ']' ';' ',' '.']
+let Delimiter = ['=' '>' '<' '!' '~' '?' ':' '+' '-' '*' '/' '&' '|' '^' '%']
+let HexDigit = ['0'-'9' 'a'-'f' 'A'-'F']
+let Digit = ['0'-'9']
+let OctalDigit = ['0'-'7']
+let TetraDigit = ['0'-'3']
+let NonZeroDigit = ['1'-'9']
+let Letter = ['a'-'z' 'A'-'Z' '_' '@']
+let AnyButSlash = [^ '/']
+let AnyButAstr = [^ '*']
+let BLANK = [' ']
+let BLK	= ['\b']
+let TAB = ['\t']
+let ESCCHR = ['\\']
+let CR = ['\r']
+let LF = ['\n']
+let AnyButNewLine = [^'\r' '\n']
+
+let OctEscape1 = ESCCHR OctalDigit
+let OctEscape2 = ESCCHR OctalDigit OctalDigit
+let OctEscape3 = ESCCHR TetraDigit OctalDigit OctalDigit
+let OctEscape =  OctEscape1 | OctEscape2 | OctEscape3 
+
+let Escape = ESCCHR ( 'r' | 'n' | 'b' | 'f' | 't' | '\\' | '\'' | '\"')
+let ULetter = Letter 
+let Identifier = ULetter (ULetter | Digit)*
+
+let Comment1 = "/*" (AnyButAstr | '*' AnyButSlash)* "*/"
+let Comment2 = "//" AnyButNewLine*
+let Comment	= Comment1 | Comment2
+
+let Dimension = "[" ( CR | LF | TAB | BLK | BLANK | Comment )* "]"
+
+let IntSuffix = [ 'l' 'L' ]
+let DecimalNum = NonZeroDigit Digit* IntSuffix?
+let OctalNum = "0" OctalDigit* IntSuffix?
+let HexNum = "0" ('x' | 'X') HexDigit+ IntSuffix?
+let IntegerLiteral = DecimalNum | OctalNum | HexNum
+
+let Sign = ['+' '-']
+let FlSuffix = ['f' 'F' 'd' 'D']
+let SignedInt = Sign? Digit+
+let Expo = ['e' 'E']
+let ExponentPart = Expo SignedInt?
+let Float1 = Digit+ "." Digit+? ExponentPart? FlSuffix?
+let Float2 = "." Digit+ ExponentPart? FlSuffix?
+let Float3 = Digit+ ExponentPart FlSuffix?
+let Float4	= Digit+ FlSuffix
+let FloatingPoint = Float1 | Float2 | Float3 | Float4
+
+let AnyChrChr = [^ '\'']
+let AnyStrChr = [^ '\"']
+let Character = '\'' ( Escape | OctEscape | AnyChrChr ) '\''
+let String = '\"' ( Escape | OctEscape | AnyStrChr )* '\"'
+let Numeric = ( IntegerLiteral | FloatingPoint )
+let Literal	= ( Numeric | Character | String )
+
+rule tokenize = parse
+| "true" { LITERAL("true") }
+| "false" { LITERAL("false") }
+
+| Separator { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
+| Delimiter { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
+| Dimension { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
+
+| "=="    { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
+| "<="    { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
+| ">="    { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
+| "!="    { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
+| "||"    { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
+| "&&"    { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
+| "++"    { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
+| "--"    { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
+| ">>"    { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
+| "<<"    { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
+| ">>>"   { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
+| "+="    { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
+| "-="    { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
+| "*="    { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
+| "/="    { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
+| "&="    { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
+| "|="    { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
+| "^="    { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
+| "%="    { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
+| "<<="   { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
+| ">>="   { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
+| ">>>="  { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
+
+| "abstract"       { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
+| "do"             { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
+| "implements"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
+| "package"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
+| "throw"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
+| "boolean"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
+| "double"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
+| "import"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
+| "private"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
+| "throws"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
+| "break"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
+| "else"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
+| "inner"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
+| "protected"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
+| "transient"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
+| "byte"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
+| "extends"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
+| "instanceof"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
+| "public"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
+| "try"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
+| "case"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
+| "final"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
+| "int"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
+| "rest"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
+| "var"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
+| "cast"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
+| "finally"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
+| "interface"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
+| "return"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
+| "void"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
+| "catch"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
+| "float"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
+| "long"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
+| "short"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
+| "volatile"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
+| "char"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
+| "for"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
+| "native"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
+| "static"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
+| "while"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
+| "class"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
+| "future"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
+| "new"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
+| "super"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
+| "const"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
+| "generic"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
+| "null"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
+| "switch"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
+| "continue"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
+| "goto"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
+| "operator"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
+| "synchronized"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
+| "default"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
+| "if"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
+| "outer"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
+| "this"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
+
+| Identifier { IDENTIFIER(LexBuffer<_>.LexemeString lexbuf) }
+
+| DecimalNum    { LITERAL(LexBuffer<_>.LexemeString lexbuf) }
+| OctalNum      { LITERAL(LexBuffer<_>.LexemeString lexbuf) }
+| HexNum        { LITERAL(LexBuffer<_>.LexemeString lexbuf) }
+
+| Float1        { LITERAL(LexBuffer<_>.LexemeString lexbuf) }
+| Float2        { LITERAL(LexBuffer<_>.LexemeString lexbuf) }
+| Float3        { LITERAL(LexBuffer<_>.LexemeString lexbuf) }
+| Float4        { LITERAL(LexBuffer<_>.LexemeString lexbuf) }
+
+| Character     { LITERAL(LexBuffer<_>.LexemeString lexbuf) }
+| String { LITERAL(LexBuffer<_>.LexemeString lexbuf) }
+
+| CR     { tokenize lexbuf }
+| LF  { tokenize lexbuf }
+| TAB  { tokenize lexbuf }
+| BLK           { tokenize lexbuf }
+| BLANK  { tokenize lexbuf }
+
+| Comment { COMMENT(LexBuffer<_>.LexemeString lexbuf) }
+| eof { EOF }
