@@ -80,7 +80,7 @@
                 </StackPanel>
             </StackPanel>
 
-            <zoom:ZoomControl Grid.Row="1" ZoomBoxOpacity="0.5" Background="#ff656565">
+            <zoom:ZoomControl Grid.Row="1" Zoom="0.2" ZoomBoxOpacity="0.5" Background="#ff656565">
                 <local:PocGraphLayout x:Name="graphLayout" Margin="10"
 						            Graph="{Binding Path=Graph}"
 						            LayoutAlgorithmType="{Binding Path=LayoutAlgorithmType, Mode=OneWay}"
