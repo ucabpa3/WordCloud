@@ -25,6 +25,9 @@
         <TextBlock Grid.Row="1" Grid.Column="0" Text="Language" Margin="0,0,5,5" />
         <ComboBox Grid.Row="1" Grid.Column="1" Margin="0,0,5,5" SelectedIndex="{Binding SelectedLanguageType}" IsSynchronizedWithCurrentItem="True">
             <ComboBoxItem>Java</ComboBoxItem>
+            <ComboBoxItem>C#</ComboBoxItem>
+            <ComboBoxItem>C</ComboBoxItem>
+            <ComboBoxItem>C++</ComboBoxItem>
         </ComboBox>
         
         <TextBlock Grid.Row="2" Grid.Column="0" Text="Word Type" Margin="0,0,5,5" />

@@ -49,17 +49,29 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Statements.fs" />
-    <FsLex Include="Lexer.fsl">
+    <FsLex Include="JavaLexer.fsl">
       <OtherFlags>--unicode</OtherFlags>
     </FsLex>
+    <Compile Include="JavaLexer.fs" />
+    <FsLex Include="CSharpLexer.fsl">
+      <OtherFlags>--unicode</OtherFlags>
+    </FsLex>
+    <Compile Include="CSharpLexer.fs" />
+    <FsLex Include="CLexer.fsl">
+      <OtherFlags>--unicode</OtherFlags>
+    </FsLex>
+    <Compile Include="CLexer.fs" />
+    <FsLex Include="CPPLexer.fsl">
+      <OtherFlags>--unicode</OtherFlags>
+    </FsLex>
+    <Compile Include="CPPLexer.fs" />
     <FsLex Include="CommentLexer.fsl">
       <OtherFlags>--unicode</OtherFlags>
     </FsLex>
-    <None Include="App.config" />
-    <Compile Include="Lexer.fs" />
     <Compile Include="CommentLexer.fs" />
     <Compile Include="API.fs" />
     <Compile Include="Program.fs" />
+    <None Include="App.config" />
     <None Include="CommentLexer.fsl" />
   </ItemGroup>
   <ItemGroup>

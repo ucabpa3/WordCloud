@@ -1,5 +1,5 @@
 {
-module Lexer
+module CPPLexer
 open System
 open Statements
 open Microsoft.FSharp.Text.Lexing

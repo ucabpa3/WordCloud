@@ -12,7 +12,7 @@ namespace WordCloud {
 
         private string sourcePath;
         private TokenType selectedWordType;
-        private int selectedLanguateType;
+        private TLanguageType selectedLanguageType;
 
         private ProjectViewModel parent;
         private RelayCommand browseSourcePathCommand;
@@ -63,10 +63,13 @@ namespace WordCloud {
 
         public int SelectedLanguageType {
             get {
-                return selectedLanguateType;
+                return (int)selectedLanguageType;
             }
             set {
-                selectedLanguateType = value;
+                if (this.selectedLanguageType == (TLanguageType)value)
+                    return;
+                selectedLanguageType = (TLanguageType)value;
+                RaisePropertyChanged("SelectedLanguageType");
             }
         }
 
@@ -100,7 +103,7 @@ namespace WordCloud {
 
         private void GenerateCloud() {
             parent.SelectedTabNumber = 1;
-            parent.CloudTab.StartWordCloud(SourcePath);
+            parent.CloudTab.StartWordCloud(SourcePath, selectedWordType, selectedLanguageType);
         }
 
         #endregion

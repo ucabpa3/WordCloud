@@ -1,11 +1,11 @@
-# 1 "Lexer.fsl"
+# 1 "JavaLexer.fsl"
  
-module Lexer
+module JavaLexer
 open System
 open Statements
 open Microsoft.FSharp.Text.Lexing
 
-# 8 "Lexer.fs"
+# 8 "JavaLexer.fs"
 let trans : uint16[] array = 
     [| 
     (* State 0 *)
@@ -788,507 +788,507 @@ and tokenize  (lexbuf : Microsoft.FSharp.Text.Lexing.LexBuffer<_>) = _fslex_toke
 and _fslex_tokenize  _fslex_state lexbuf =
   match _fslex_tables.Interpret(_fslex_state,lexbuf) with
   | 0 -> ( 
-# 66 "Lexer.fsl"
+# 66 "JavaLexer.fsl"
                           LITERAL("true") 
-# 793 "Lexer.fs"
+# 793 "JavaLexer.fs"
           )
   | 1 -> ( 
-# 67 "Lexer.fsl"
+# 67 "JavaLexer.fsl"
                            LITERAL("false") 
-# 798 "Lexer.fs"
+# 798 "JavaLexer.fs"
           )
   | 2 -> ( 
-# 69 "Lexer.fsl"
+# 69 "JavaLexer.fsl"
                              DONTCARE(LexBuffer<_>.LexemeString lexbuf) 
-# 803 "Lexer.fs"
+# 803 "JavaLexer.fs"
           )
   | 3 -> ( 
-# 70 "Lexer.fsl"
+# 70 "JavaLexer.fsl"
                              DONTCARE(LexBuffer<_>.LexemeString lexbuf) 
-# 808 "Lexer.fs"
+# 808 "JavaLexer.fs"
           )
   | 4 -> ( 
-# 71 "Lexer.fsl"
+# 71 "JavaLexer.fsl"
                              DONTCARE(LexBuffer<_>.LexemeString lexbuf) 
-# 813 "Lexer.fs"
+# 813 "JavaLexer.fs"
           )
   | 5 -> ( 
-# 73 "Lexer.fsl"
+# 73 "JavaLexer.fsl"
                            DONTCARE(LexBuffer<_>.LexemeString lexbuf) 
-# 818 "Lexer.fs"
+# 818 "JavaLexer.fs"
           )
   | 6 -> ( 
-# 74 "Lexer.fsl"
+# 74 "JavaLexer.fsl"
                            DONTCARE(LexBuffer<_>.LexemeString lexbuf) 
-# 823 "Lexer.fs"
+# 823 "JavaLexer.fs"
           )
   | 7 -> ( 
-# 75 "Lexer.fsl"
+# 75 "JavaLexer.fsl"
                            DONTCARE(LexBuffer<_>.LexemeString lexbuf) 
-# 828 "Lexer.fs"
+# 828 "JavaLexer.fs"
           )
   | 8 -> ( 
-# 76 "Lexer.fsl"
+# 76 "JavaLexer.fsl"
                            DONTCARE(LexBuffer<_>.LexemeString lexbuf) 
-# 833 "Lexer.fs"
+# 833 "JavaLexer.fs"
           )
   | 9 -> ( 
-# 77 "Lexer.fsl"
+# 77 "JavaLexer.fsl"
                            DONTCARE(LexBuffer<_>.LexemeString lexbuf) 
-# 838 "Lexer.fs"
+# 838 "JavaLexer.fs"
           )
   | 10 -> ( 
-# 78 "Lexer.fsl"
+# 78 "JavaLexer.fsl"
                            DONTCARE(LexBuffer<_>.LexemeString lexbuf) 
-# 843 "Lexer.fs"
+# 843 "JavaLexer.fs"
           )
   | 11 -> ( 
-# 79 "Lexer.fsl"
+# 79 "JavaLexer.fsl"
                            DONTCARE(LexBuffer<_>.LexemeString lexbuf) 
-# 848 "Lexer.fs"
+# 848 "JavaLexer.fs"
           )
   | 12 -> ( 
-# 80 "Lexer.fsl"
+# 80 "JavaLexer.fsl"
                            DONTCARE(LexBuffer<_>.LexemeString lexbuf) 
-# 853 "Lexer.fs"
+# 853 "JavaLexer.fs"
           )
   | 13 -> ( 
-# 81 "Lexer.fsl"
+# 81 "JavaLexer.fsl"
                            DONTCARE(LexBuffer<_>.LexemeString lexbuf) 
-# 858 "Lexer.fs"
+# 858 "JavaLexer.fs"
           )
   | 14 -> ( 
-# 82 "Lexer.fsl"
+# 82 "JavaLexer.fsl"
                            DONTCARE(LexBuffer<_>.LexemeString lexbuf) 
-# 863 "Lexer.fs"
+# 863 "JavaLexer.fs"
           )
   | 15 -> ( 
-# 83 "Lexer.fsl"
+# 83 "JavaLexer.fsl"
                            DONTCARE(LexBuffer<_>.LexemeString lexbuf) 
-# 868 "Lexer.fs"
+# 868 "JavaLexer.fs"
           )
   | 16 -> ( 
-# 84 "Lexer.fsl"
+# 84 "JavaLexer.fsl"
                            DONTCARE(LexBuffer<_>.LexemeString lexbuf) 
-# 873 "Lexer.fs"
+# 873 "JavaLexer.fs"
           )
   | 17 -> ( 
-# 85 "Lexer.fsl"
+# 85 "JavaLexer.fsl"
                            DONTCARE(LexBuffer<_>.LexemeString lexbuf) 
-# 878 "Lexer.fs"
+# 878 "JavaLexer.fs"
           )
   | 18 -> ( 
-# 86 "Lexer.fsl"
+# 86 "JavaLexer.fsl"
                            DONTCARE(LexBuffer<_>.LexemeString lexbuf) 
-# 883 "Lexer.fs"
+# 883 "JavaLexer.fs"
           )
   | 19 -> ( 
-# 87 "Lexer.fsl"
+# 87 "JavaLexer.fsl"
                            DONTCARE(LexBuffer<_>.LexemeString lexbuf) 
-# 888 "Lexer.fs"
+# 888 "JavaLexer.fs"
           )
   | 20 -> ( 
-# 88 "Lexer.fsl"
+# 88 "JavaLexer.fsl"
                            DONTCARE(LexBuffer<_>.LexemeString lexbuf) 
-# 893 "Lexer.fs"
+# 893 "JavaLexer.fs"
           )
   | 21 -> ( 
-# 89 "Lexer.fsl"
+# 89 "JavaLexer.fsl"
                            DONTCARE(LexBuffer<_>.LexemeString lexbuf) 
-# 898 "Lexer.fs"
+# 898 "JavaLexer.fs"
           )
   | 22 -> ( 
-# 90 "Lexer.fsl"
+# 90 "JavaLexer.fsl"
                            DONTCARE(LexBuffer<_>.LexemeString lexbuf) 
-# 903 "Lexer.fs"
+# 903 "JavaLexer.fs"
           )
   | 23 -> ( 
-# 91 "Lexer.fsl"
+# 91 "JavaLexer.fsl"
                            DONTCARE(LexBuffer<_>.LexemeString lexbuf) 
-# 908 "Lexer.fs"
+# 908 "JavaLexer.fs"
           )
   | 24 -> ( 
-# 92 "Lexer.fsl"
+# 92 "JavaLexer.fsl"
                            DONTCARE(LexBuffer<_>.LexemeString lexbuf) 
-# 913 "Lexer.fs"
+# 913 "JavaLexer.fs"
           )
   | 25 -> ( 
-# 93 "Lexer.fsl"
+# 93 "JavaLexer.fsl"
                            DONTCARE(LexBuffer<_>.LexemeString lexbuf) 
-# 918 "Lexer.fs"
+# 918 "JavaLexer.fs"
           )
   | 26 -> ( 
-# 94 "Lexer.fsl"
+# 94 "JavaLexer.fsl"
                            DONTCARE(LexBuffer<_>.LexemeString lexbuf) 
-# 923 "Lexer.fs"
+# 923 "JavaLexer.fs"
           )
   | 27 -> ( 
-# 96 "Lexer.fsl"
+# 96 "JavaLexer.fsl"
                                     KEYWORD(LexBuffer<_>.LexemeString lexbuf) 
-# 928 "Lexer.fs"
+# 928 "JavaLexer.fs"
           )
   | 28 -> ( 
-# 97 "Lexer.fsl"
+# 97 "JavaLexer.fsl"
                                     KEYWORD(LexBuffer<_>.LexemeString lexbuf) 
-# 933 "Lexer.fs"
+# 933 "JavaLexer.fs"
           )
   | 29 -> ( 
-# 98 "Lexer.fsl"
+# 98 "JavaLexer.fsl"
                                  KEYWORD(LexBuffer<_>.LexemeString lexbuf) 
-# 938 "Lexer.fs"
+# 938 "JavaLexer.fs"
           )
   | 30 -> ( 
-# 99 "Lexer.fsl"
+# 99 "JavaLexer.fsl"
                               KEYWORD(LexBuffer<_>.LexemeString lexbuf) 
-# 943 "Lexer.fs"
+# 943 "JavaLexer.fs"
           )
   | 31 -> ( 
-# 100 "Lexer.fsl"
+# 100 "JavaLexer.fsl"
                             KEYWORD(LexBuffer<_>.LexemeString lexbuf) 
-# 948 "Lexer.fs"
+# 948 "JavaLexer.fs"
           )
   | 32 -> ( 
-# 101 "Lexer.fsl"
+# 101 "JavaLexer.fsl"
                               KEYWORD(LexBuffer<_>.LexemeString lexbuf) 
-# 953 "Lexer.fs"
+# 953 "JavaLexer.fs"
           )
   | 33 -> ( 
-# 102 "Lexer.fsl"
+# 102 "JavaLexer.fsl"
                              KEYWORD(LexBuffer<_>.LexemeString lexbuf) 
-# 958 "Lexer.fs"
+# 958 "JavaLexer.fs"
           )
   | 34 -> ( 
-# 103 "Lexer.fsl"
+# 103 "JavaLexer.fsl"
                              KEYWORD(LexBuffer<_>.LexemeString lexbuf) 
-# 963 "Lexer.fs"
+# 963 "JavaLexer.fs"
           )
   | 35 -> ( 
-# 104 "Lexer.fsl"
+# 104 "JavaLexer.fsl"
                               KEYWORD(LexBuffer<_>.LexemeString lexbuf) 
-# 968 "Lexer.fs"
+# 968 "JavaLexer.fs"
           )
   | 36 -> ( 
-# 105 "Lexer.fsl"
+# 105 "JavaLexer.fsl"
                              KEYWORD(LexBuffer<_>.LexemeString lexbuf) 
-# 973 "Lexer.fs"
+# 973 "JavaLexer.fs"
           )
   | 37 -> ( 
-# 106 "Lexer.fsl"
+# 106 "JavaLexer.fsl"
                             KEYWORD(LexBuffer<_>.LexemeString lexbuf) 
-# 978 "Lexer.fs"
+# 978 "JavaLexer.fs"
           )
   | 38 -> ( 
-# 107 "Lexer.fsl"
+# 107 "JavaLexer.fsl"
                            KEYWORD(LexBuffer<_>.LexemeString lexbuf) 
-# 983 "Lexer.fs"
+# 983 "JavaLexer.fs"
           )
   | 39 -> ( 
-# 108 "Lexer.fsl"
+# 108 "JavaLexer.fsl"
                             KEYWORD(LexBuffer<_>.LexemeString lexbuf) 
-# 988 "Lexer.fs"
+# 988 "JavaLexer.fs"
           )
   | 40 -> ( 
-# 109 "Lexer.fsl"
+# 109 "JavaLexer.fsl"
                                 KEYWORD(LexBuffer<_>.LexemeString lexbuf) 
-# 993 "Lexer.fs"
+# 993 "JavaLexer.fs"
           )
   | 41 -> ( 
-# 110 "Lexer.fsl"
+# 110 "JavaLexer.fsl"
                                 KEYWORD(LexBuffer<_>.LexemeString lexbuf) 
-# 998 "Lexer.fs"
+# 998 "JavaLexer.fs"
           )
   | 42 -> ( 
-# 111 "Lexer.fsl"
+# 111 "JavaLexer.fsl"
                            KEYWORD(LexBuffer<_>.LexemeString lexbuf) 
-# 1003 "Lexer.fs"
+# 1003 "JavaLexer.fs"
           )
   | 43 -> ( 
-# 112 "Lexer.fsl"
+# 112 "JavaLexer.fsl"
                               KEYWORD(LexBuffer<_>.LexemeString lexbuf) 
-# 1008 "Lexer.fs"
+# 1008 "JavaLexer.fs"
           )
   | 44 -> ( 
-# 113 "Lexer.fsl"
+# 113 "JavaLexer.fsl"
                                  KEYWORD(LexBuffer<_>.LexemeString lexbuf) 
-# 1013 "Lexer.fs"
+# 1013 "JavaLexer.fs"
           )
   | 45 -> ( 
-# 114 "Lexer.fsl"
+# 114 "JavaLexer.fsl"
                              KEYWORD(LexBuffer<_>.LexemeString lexbuf) 
-# 1018 "Lexer.fs"
+# 1018 "JavaLexer.fs"
           )
   | 46 -> ( 
-# 115 "Lexer.fsl"
+# 115 "JavaLexer.fsl"
                           KEYWORD(LexBuffer<_>.LexemeString lexbuf) 
-# 1023 "Lexer.fs"
+# 1023 "JavaLexer.fs"
           )
   | 47 -> ( 
-# 116 "Lexer.fsl"
+# 116 "JavaLexer.fsl"
                            KEYWORD(LexBuffer<_>.LexemeString lexbuf) 
-# 1028 "Lexer.fs"
+# 1028 "JavaLexer.fs"
           )
   | 48 -> ( 
-# 117 "Lexer.fsl"
+# 117 "JavaLexer.fsl"
                             KEYWORD(LexBuffer<_>.LexemeString lexbuf) 
-# 1033 "Lexer.fs"
+# 1033 "JavaLexer.fs"
           )
   | 49 -> ( 
-# 118 "Lexer.fsl"
+# 118 "JavaLexer.fsl"
                           KEYWORD(LexBuffer<_>.LexemeString lexbuf) 
-# 1038 "Lexer.fs"
+# 1038 "JavaLexer.fs"
           )
   | 50 -> ( 
-# 119 "Lexer.fsl"
+# 119 "JavaLexer.fsl"
                            KEYWORD(LexBuffer<_>.LexemeString lexbuf) 
-# 1043 "Lexer.fs"
+# 1043 "JavaLexer.fs"
           )
   | 51 -> ( 
-# 120 "Lexer.fsl"
+# 120 "JavaLexer.fsl"
                           KEYWORD(LexBuffer<_>.LexemeString lexbuf) 
-# 1048 "Lexer.fs"
+# 1048 "JavaLexer.fs"
           )
   | 52 -> ( 
-# 121 "Lexer.fsl"
+# 121 "JavaLexer.fsl"
                            KEYWORD(LexBuffer<_>.LexemeString lexbuf) 
-# 1053 "Lexer.fs"
+# 1053 "JavaLexer.fs"
           )
   | 53 -> ( 
-# 122 "Lexer.fsl"
+# 122 "JavaLexer.fsl"
                               KEYWORD(LexBuffer<_>.LexemeString lexbuf) 
-# 1058 "Lexer.fs"
+# 1058 "JavaLexer.fs"
           )
   | 54 -> ( 
-# 123 "Lexer.fsl"
+# 123 "JavaLexer.fsl"
                                 KEYWORD(LexBuffer<_>.LexemeString lexbuf) 
-# 1063 "Lexer.fs"
+# 1063 "JavaLexer.fs"
           )
   | 55 -> ( 
-# 124 "Lexer.fsl"
+# 124 "JavaLexer.fsl"
                              KEYWORD(LexBuffer<_>.LexemeString lexbuf) 
-# 1068 "Lexer.fs"
+# 1068 "JavaLexer.fs"
           )
   | 56 -> ( 
-# 125 "Lexer.fsl"
+# 125 "JavaLexer.fsl"
                            KEYWORD(LexBuffer<_>.LexemeString lexbuf) 
-# 1073 "Lexer.fs"
+# 1073 "JavaLexer.fs"
           )
   | 57 -> ( 
-# 126 "Lexer.fsl"
+# 126 "JavaLexer.fsl"
                             KEYWORD(LexBuffer<_>.LexemeString lexbuf) 
-# 1078 "Lexer.fs"
+# 1078 "JavaLexer.fs"
           )
   | 58 -> ( 
-# 127 "Lexer.fsl"
+# 127 "JavaLexer.fsl"
                             KEYWORD(LexBuffer<_>.LexemeString lexbuf) 
-# 1083 "Lexer.fs"
+# 1083 "JavaLexer.fs"
           )
   | 59 -> ( 
-# 128 "Lexer.fsl"
+# 128 "JavaLexer.fsl"
                            KEYWORD(LexBuffer<_>.LexemeString lexbuf) 
-# 1088 "Lexer.fs"
+# 1088 "JavaLexer.fs"
           )
   | 60 -> ( 
-# 129 "Lexer.fsl"
+# 129 "JavaLexer.fsl"
                             KEYWORD(LexBuffer<_>.LexemeString lexbuf) 
-# 1093 "Lexer.fs"
+# 1093 "JavaLexer.fs"
           )
   | 61 -> ( 
-# 130 "Lexer.fsl"
+# 130 "JavaLexer.fsl"
                                KEYWORD(LexBuffer<_>.LexemeString lexbuf) 
-# 1098 "Lexer.fs"
+# 1098 "JavaLexer.fs"
           )
   | 62 -> ( 
-# 131 "Lexer.fsl"
+# 131 "JavaLexer.fsl"
                            KEYWORD(LexBuffer<_>.LexemeString lexbuf) 
-# 1103 "Lexer.fs"
+# 1103 "JavaLexer.fs"
           )
   | 63 -> ( 
-# 132 "Lexer.fsl"
+# 132 "JavaLexer.fsl"
                           KEYWORD(LexBuffer<_>.LexemeString lexbuf) 
-# 1108 "Lexer.fs"
+# 1108 "JavaLexer.fs"
           )
   | 64 -> ( 
-# 133 "Lexer.fsl"
+# 133 "JavaLexer.fsl"
                              KEYWORD(LexBuffer<_>.LexemeString lexbuf) 
-# 1113 "Lexer.fs"
+# 1113 "JavaLexer.fs"
           )
   | 65 -> ( 
-# 134 "Lexer.fsl"
+# 134 "JavaLexer.fsl"
                              KEYWORD(LexBuffer<_>.LexemeString lexbuf) 
-# 1118 "Lexer.fs"
+# 1118 "JavaLexer.fs"
           )
   | 66 -> ( 
-# 135 "Lexer.fsl"
+# 135 "JavaLexer.fsl"
                             KEYWORD(LexBuffer<_>.LexemeString lexbuf) 
-# 1123 "Lexer.fs"
+# 1123 "JavaLexer.fs"
           )
   | 67 -> ( 
-# 136 "Lexer.fsl"
+# 136 "JavaLexer.fsl"
                             KEYWORD(LexBuffer<_>.LexemeString lexbuf) 
-# 1128 "Lexer.fs"
+# 1128 "JavaLexer.fs"
           )
   | 68 -> ( 
-# 137 "Lexer.fsl"
+# 137 "JavaLexer.fsl"
                              KEYWORD(LexBuffer<_>.LexemeString lexbuf) 
-# 1133 "Lexer.fs"
+# 1133 "JavaLexer.fs"
           )
   | 69 -> ( 
-# 138 "Lexer.fsl"
+# 138 "JavaLexer.fsl"
                           KEYWORD(LexBuffer<_>.LexemeString lexbuf) 
-# 1138 "Lexer.fs"
+# 1138 "JavaLexer.fs"
           )
   | 70 -> ( 
-# 139 "Lexer.fsl"
+# 139 "JavaLexer.fsl"
                             KEYWORD(LexBuffer<_>.LexemeString lexbuf) 
-# 1143 "Lexer.fs"
+# 1143 "JavaLexer.fs"
           )
   | 71 -> ( 
-# 140 "Lexer.fsl"
+# 140 "JavaLexer.fsl"
                             KEYWORD(LexBuffer<_>.LexemeString lexbuf) 
-# 1148 "Lexer.fs"
+# 1148 "JavaLexer.fs"
           )
   | 72 -> ( 
-# 141 "Lexer.fsl"
+# 141 "JavaLexer.fsl"
                               KEYWORD(LexBuffer<_>.LexemeString lexbuf) 
-# 1153 "Lexer.fs"
+# 1153 "JavaLexer.fs"
           )
   | 73 -> ( 
-# 142 "Lexer.fsl"
+# 142 "JavaLexer.fsl"
                            KEYWORD(LexBuffer<_>.LexemeString lexbuf) 
-# 1158 "Lexer.fs"
+# 1158 "JavaLexer.fs"
           )
   | 74 -> ( 
-# 143 "Lexer.fsl"
+# 143 "JavaLexer.fsl"
                              KEYWORD(LexBuffer<_>.LexemeString lexbuf) 
-# 1163 "Lexer.fs"
+# 1163 "JavaLexer.fs"
           )
   | 75 -> ( 
-# 144 "Lexer.fsl"
+# 144 "JavaLexer.fsl"
                                KEYWORD(LexBuffer<_>.LexemeString lexbuf) 
-# 1168 "Lexer.fs"
+# 1168 "JavaLexer.fs"
           )
   | 76 -> ( 
-# 145 "Lexer.fsl"
+# 145 "JavaLexer.fsl"
                            KEYWORD(LexBuffer<_>.LexemeString lexbuf) 
-# 1173 "Lexer.fs"
+# 1173 "JavaLexer.fs"
           )
   | 77 -> ( 
-# 146 "Lexer.fsl"
+# 146 "JavaLexer.fsl"
                                KEYWORD(LexBuffer<_>.LexemeString lexbuf) 
-# 1178 "Lexer.fs"
+# 1178 "JavaLexer.fs"
           )
   | 78 -> ( 
-# 147 "Lexer.fsl"
+# 147 "JavaLexer.fsl"
                                    KEYWORD(LexBuffer<_>.LexemeString lexbuf) 
-# 1183 "Lexer.fs"
+# 1183 "JavaLexer.fs"
           )
   | 79 -> ( 
-# 148 "Lexer.fsl"
+# 148 "JavaLexer.fsl"
                               KEYWORD(LexBuffer<_>.LexemeString lexbuf) 
-# 1188 "Lexer.fs"
+# 1188 "JavaLexer.fs"
           )
   | 80 -> ( 
-# 149 "Lexer.fsl"
+# 149 "JavaLexer.fsl"
                          KEYWORD(LexBuffer<_>.LexemeString lexbuf) 
-# 1193 "Lexer.fs"
+# 1193 "JavaLexer.fs"
           )
   | 81 -> ( 
-# 150 "Lexer.fsl"
+# 150 "JavaLexer.fsl"
                             KEYWORD(LexBuffer<_>.LexemeString lexbuf) 
-# 1198 "Lexer.fs"
+# 1198 "JavaLexer.fs"
           )
   | 82 -> ( 
-# 151 "Lexer.fsl"
+# 151 "JavaLexer.fsl"
                            KEYWORD(LexBuffer<_>.LexemeString lexbuf) 
-# 1203 "Lexer.fs"
+# 1203 "JavaLexer.fs"
           )
   | 83 -> ( 
-# 153 "Lexer.fsl"
+# 153 "JavaLexer.fsl"
                               IDENTIFIER(LexBuffer<_>.LexemeString lexbuf) 
-# 1208 "Lexer.fs"
+# 1208 "JavaLexer.fs"
           )
   | 84 -> ( 
-# 155 "Lexer.fsl"
+# 155 "JavaLexer.fsl"
                                  LITERAL(LexBuffer<_>.LexemeString lexbuf) 
-# 1213 "Lexer.fs"
+# 1213 "JavaLexer.fs"
           )
   | 85 -> ( 
-# 156 "Lexer.fsl"
+# 156 "JavaLexer.fsl"
                                  LITERAL(LexBuffer<_>.LexemeString lexbuf) 
-# 1218 "Lexer.fs"
+# 1218 "JavaLexer.fs"
           )
   | 86 -> ( 
-# 157 "Lexer.fsl"
+# 157 "JavaLexer.fsl"
                                  LITERAL(LexBuffer<_>.LexemeString lexbuf) 
-# 1223 "Lexer.fs"
+# 1223 "JavaLexer.fs"
           )
   | 87 -> ( 
-# 159 "Lexer.fsl"
+# 159 "JavaLexer.fsl"
                                  LITERAL(LexBuffer<_>.LexemeString lexbuf) 
-# 1228 "Lexer.fs"
+# 1228 "JavaLexer.fs"
           )
   | 88 -> ( 
-# 160 "Lexer.fsl"
+# 160 "JavaLexer.fsl"
                                  LITERAL(LexBuffer<_>.LexemeString lexbuf) 
-# 1233 "Lexer.fs"
+# 1233 "JavaLexer.fs"
           )
   | 89 -> ( 
-# 161 "Lexer.fsl"
+# 161 "JavaLexer.fsl"
                                  LITERAL(LexBuffer<_>.LexemeString lexbuf) 
-# 1238 "Lexer.fs"
+# 1238 "JavaLexer.fs"
           )
   | 90 -> ( 
-# 162 "Lexer.fsl"
+# 162 "JavaLexer.fsl"
                                  LITERAL(LexBuffer<_>.LexemeString lexbuf) 
-# 1243 "Lexer.fs"
+# 1243 "JavaLexer.fs"
           )
   | 91 -> ( 
-# 164 "Lexer.fsl"
+# 164 "JavaLexer.fsl"
                                  LITERAL(LexBuffer<_>.LexemeString lexbuf) 
-# 1248 "Lexer.fs"
+# 1248 "JavaLexer.fs"
           )
   | 92 -> ( 
-# 165 "Lexer.fsl"
+# 165 "JavaLexer.fsl"
                           LITERAL(LexBuffer<_>.LexemeString lexbuf) 
-# 1253 "Lexer.fs"
+# 1253 "JavaLexer.fs"
           )
   | 93 -> ( 
-# 167 "Lexer.fsl"
+# 167 "JavaLexer.fsl"
                           tokenize lexbuf 
-# 1258 "Lexer.fs"
+# 1258 "JavaLexer.fs"
           )
   | 94 -> ( 
-# 168 "Lexer.fsl"
+# 168 "JavaLexer.fsl"
                        tokenize lexbuf 
-# 1263 "Lexer.fs"
+# 1263 "JavaLexer.fs"
           )
   | 95 -> ( 
-# 169 "Lexer.fsl"
+# 169 "JavaLexer.fsl"
                         tokenize lexbuf 
-# 1268 "Lexer.fs"
+# 1268 "JavaLexer.fs"
           )
   | 96 -> ( 
-# 170 "Lexer.fsl"
+# 170 "JavaLexer.fsl"
                                  tokenize lexbuf 
-# 1273 "Lexer.fs"
+# 1273 "JavaLexer.fs"
           )
   | 97 -> ( 
-# 171 "Lexer.fsl"
+# 171 "JavaLexer.fsl"
                           tokenize lexbuf 
-# 1278 "Lexer.fs"
+# 1278 "JavaLexer.fs"
           )
   | 98 -> ( 
-# 173 "Lexer.fsl"
+# 173 "JavaLexer.fsl"
                            COMMENT(LexBuffer<_>.LexemeString lexbuf) 
-# 1283 "Lexer.fs"
+# 1283 "JavaLexer.fs"
           )
   | 99 -> ( 
-# 174 "Lexer.fsl"
+# 174 "JavaLexer.fsl"
                        EOF 
-# 1288 "Lexer.fs"
+# 1288 "JavaLexer.fs"
           )
   | _ -> failwith "tokenize"
 
-# 175 "Lexer.fsl"
+# 175 "JavaLexer.fsl"
 
-# 3000000 "Lexer.fs"
+# 3000000 "JavaLexer.fs"

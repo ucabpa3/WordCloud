@@ -19,8 +19,15 @@ namespace WordCloud {
         private ProjectViewModel parent;
         private List<Word> wordsList;
 
+        private Dictionary<TLanguageType, List<string>> extensions = new Dictionary<TLanguageType, List<string>>() {
+            { TLanguageType.Java, new List<String>() { ".java" } },
+            { TLanguageType.CSharp, new List<String>() { ".cs" } },
+            { TLanguageType.C, new List<String>() { ".c", ".h" } },
+            { TLanguageType.CPlusPlus, new List<String>() { ".cpp", ".h" } },
+        };
+        
         #endregion
-
+        
         #region Initialization
 
         public CloudViewModel(ProjectViewModel parent) {
@@ -59,29 +66,34 @@ namespace WordCloud {
 
         #region Public Methods
 
-        public void StartWordCloud(string directoryPath) {
+        public void StartWordCloud(string directoryPath, TokenType wordType, TLanguageType lang) {
             
             List<Word> words = new List<Word>();
-            foreach(string fileName in GetFiles(directoryPath))
-                words.AddRange(API.PublicAPI.ExtractTokens(fileName));
+            try {
+                foreach (string fileName in GetFiles(directoryPath, extensions[lang]))
+                    words.AddRange(API.PublicAPI.ExtractTokens(new System.IO.StreamReader(fileName), lang));
+            } catch {}
 
-            var t = from w in words.Where(w => w != null)
-                    group w by new { w.Type, w.Name } into g
-                    select new Word(g.Key.Type, g.Key.Name, g.Count());
-            wordsList = t.ToList();
+            var wl = from w in words.Where(w => w != null)
+                           group w by new { w.Type, w.Name } into g
+                           select new Word(g.Key.Type, g.Key.Name, g.Count());
 
+            wordsList = wl.Where(w => w.Type == wordType).ToList();
+
+            if (wordsList.Count == 0) return;
+            
             Cloud c = new Cloud(Convert.ToInt32(CanvasHeight), Convert.ToInt32(CanvasWidth));
             c.CreateCloud(wordsList);
             Elements = c.Holder;
         }
 
-        private List<string> GetFiles(string directoryPath) {
+        private List<string> GetFiles(string directoryPath, List<string> ext) {
             DirectoryInfo d = new DirectoryInfo(directoryPath);
             List<string> retVal = new List<string>();
             foreach(DirectoryInfo subD in d.GetDirectories())
-                retVal.AddRange(GetFiles(subD.FullName));
+                retVal.AddRange(GetFiles(subD.FullName, ext));
             foreach(FileInfo file in d.GetFiles()) {
-                if (file.Extension == ".java")
+                if (ext.Contains(file.Extension))
                     retVal.Add(file.FullName);
             }
             return retVal;
