@@ -81,8 +81,9 @@ namespace WordCloud {
             wordsList = wl.Where(w => w.Type == wordType).ToList();
 
             if (wordsList.Count == 0) return;
-            
-            Cloud c = new Cloud(Convert.ToInt32(CanvasHeight), Convert.ToInt32(CanvasWidth));
+
+            Cloud c = new Cloud(800, 800);
+            //Cloud c = new Cloud(Convert.ToInt32(CanvasHeight), Convert.ToInt32(CanvasWidth));
             c.CreateCloud(wordsList);
             Elements = c.Holder;
         }
@@ -109,7 +110,7 @@ namespace WordCloud {
             string clickedItem = parameter.ToString();
 
             /* Switch tab to Graph */
-            parent.SelectedTabNumber = 1;
+            parent.SelectedTabNumber = 2;
             parent.GraphTab.RunGraph(clickedItem, wordsList);
         }
 
