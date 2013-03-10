@@ -64,11 +64,16 @@
     <FsLex Include="CommentLexer.fsl">
       <OtherFlags>--unicode</OtherFlags>
     </FsLex>
+    <Compile Include="LiteralLexer.fs" />
+    <FsLex Include="LiteralLexer.fsl">
+      <OtherFlags>--unicode</OtherFlags>
+    </FsLex>
     <Compile Include="CommentLexer.fs" />
     <Compile Include="API.fs" />
     <Compile Include="Program.fs" />
     <None Include="App.config" />
     <None Include="CommentLexer.fsl" />
+    <None Include="LiteralLexer.fsl" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MicrosoftJava.Shared\MicrosoftJava.Shared.csproj">

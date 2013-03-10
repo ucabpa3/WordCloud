@@ -2,6 +2,10 @@
 
 open System
 
+type LiteralToken = 
+    | LITERALTOKEN of string
+    | EO
+
 type CommentToken =
     | COMMENTTOKEN of string
     | EOL 
