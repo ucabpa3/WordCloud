@@ -6,7 +6,7 @@ open Microsoft.FSharp.Text.Lexing
 }
 
 let Separator = ['(' ')' '{' '}' '[' ']' ';' ',' '.']
-let Delimiter = ['=' '>' '<' '!' '~' '?' ':' '+' '-' '*' '/' '&' '|' '^' '%']
+let Delimiter = ['=' '>' '<' '!' '~' '?' ':' '+' '-' '*' '/' '&' '|' '^' '%' '#']
 let HexDigit = ['0'-'9' 'a'-'f' 'A'-'F']
 let Digit = ['0'-'9']
 let OctalDigit = ['0'-'7']
@@ -15,12 +15,14 @@ let NonZeroDigit = ['1'-'9']
 let Letter = ['a'-'z' 'A'-'Z' '_' '@']
 let AnyButSlash = [^ '/']
 let AnyButAstr = [^ '*']
-let BLANK = [' ']
+let SPACE = [' ']
 let BLK	= ['\b']
 let TAB = ['\t']
 let ESCCHR = ['\\']
 let CR = ['\r']
 let LF = ['\n']
+let BLANK = ( SPACE | BLK | TAB | CR | LF | TransferLine )*
+let TransferLine = ESCCHR ( SPACE | BLK | TAB | CR | LF )*
 let AnyButNewLine = [^'\r' '\n']
 
 let OctEscape1 = ESCCHR OctalDigit
@@ -28,7 +30,7 @@ let OctEscape2 = ESCCHR OctalDigit OctalDigit
 let OctEscape3 = ESCCHR TetraDigit OctalDigit OctalDigit
 let OctEscape =  OctEscape1 | OctEscape2 | OctEscape3 
 
-let Escape = ESCCHR ( 'r' | 'n' | 'b' | 'f' | 't' | '\\' | '\'' | '\"')
+let Escape = ESCCHR ( 'r' | 'n' | 'a' | 'b' | 'f' | 't' | 'v' | "xff" | '0' | '\\' | '\'' | '\"' )
 let ULetter = Letter 
 let Identifier = ULetter (ULetter | Digit)*
 
@@ -58,117 +60,26 @@ let FloatingPoint = Float1 | Float2 | Float3 | Float4
 let AnyChrChr = [^ '\'']
 let AnyStrChr = [^ '\"']
 let Character = '\'' ( Escape | OctEscape | AnyChrChr ) '\''
-let String = '\"' ( Escape | OctEscape | AnyStrChr )* '\"'
+let String =  '\"' ( Escape | OctEscape | AnyStrChr )* '\"'
 let Numeric = ( IntegerLiteral | FloatingPoint )
 let Literal	= ( Numeric | Character | String )
 
+let Keyword = ( "alignas" | "alignof" | "and" | "and_eq" | "asm" | "auto" | "bitand" | "bitor" | "bool" | "break" | "case" | "catch" | "char" | "char16_t " | "char32_t " | "class" | "compl" | "const" | "constexpr " | "const_cast" | "continue" | "decltype" | "default" | "delete" | "do" | "double" | "dynamic_cast" | "else" | "enum" | "explicit" | "export" | "extern" | "final" | "float" | "for" | "friend" | "goto" | "if" | "inline" | "int" | "long" | "mutable" | "namespace" | "new" | "noexcept" | "not" | "not_eq" | "nullptr" | "operator" | "or" | "or_eq" | "override" | "private" | "protected" | "public" | "register" | "reinterpret_cast" | "return" | "short" | "signed" | "sizeof" | "static" | "static_assert" | "static_cast" | "struct" | "switch" | "template" | "this" | "thread_local" | "throw" | "try" | "typedef" | "typeid" | "typename" | "union" | "unsigned" | "using" | "virtual" | "void" | "volatile" | "wchar_t" | "while" | "xor" | "xor_eq" )
+let PreprocKeyword = ( "include" | "if" | "ifndef" | "ifdef" | "else" | "elif" | "endif" | "define" | "undef" | "line" | "error" | "warning" | "pragma" )
+let Preproc = '#' BLANK* PreprocKeyword
 rule tokenize = parse
-| "true" { LITERAL("true") }
-| "false" { LITERAL("false") }
+| BLANK*  { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
 
-| Separator { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
-| Delimiter { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
-| Dimension { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
+| Separator* { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
+| Delimiter* { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
+| Dimension* { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
 
-| "=="    { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
-| "<="    { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
-| ">="    { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
-| "!="    { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
-| "||"    { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
-| "&&"    { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
-| "++"    { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
-| "--"    { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
-| ">>"    { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
-| "<<"    { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
-| ">>>"   { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
-| "+="    { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
-| "-="    { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
-| "*="    { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
-| "/="    { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
-| "&="    { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
-| "|="    { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
-| "^="    { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
-| "%="    { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
-| "<<="   { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
-| ">>="   { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
-| ">>>="  { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
-
-| "abstract"       { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
-| "do"             { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
-| "implements"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
-| "package"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
-| "throw"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
-| "boolean"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
-| "double"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
-| "import"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
-| "private"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
-| "throws"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
-| "break"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
-| "else"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
-| "inner"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
-| "protected"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
-| "transient"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
-| "byte"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
-| "extends"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
-| "instanceof"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
-| "public"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
-| "try"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
-| "case"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
-| "final"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
-| "int"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
-| "rest"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
-| "var"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
-| "cast"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
-| "finally"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
-| "interface"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
-| "return"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
-| "void"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
-| "catch"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
-| "float"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
-| "long"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
-| "short"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
-| "volatile"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
-| "char"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
-| "for"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
-| "native"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
-| "static"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
-| "while"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
-| "class"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
-| "future"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
-| "new"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
-| "super"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
-| "const"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
-| "generic"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
-| "null"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
-| "switch"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
-| "continue"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
-| "goto"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
-| "operator"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
-| "synchronized"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
-| "default"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
-| "if"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
-| "outer"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
-| "this"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
-
-| Identifier { IDENTIFIER(LexBuffer<_>.LexemeString lexbuf) }
-
-| DecimalNum    { LITERAL(LexBuffer<_>.LexemeString lexbuf) }
-| OctalNum      { LITERAL(LexBuffer<_>.LexemeString lexbuf) }
-| HexNum        { LITERAL(LexBuffer<_>.LexemeString lexbuf) }
-
-| Float1        { LITERAL(LexBuffer<_>.LexemeString lexbuf) }
-| Float2        { LITERAL(LexBuffer<_>.LexemeString lexbuf) }
-| Float3        { LITERAL(LexBuffer<_>.LexemeString lexbuf) }
-| Float4        { LITERAL(LexBuffer<_>.LexemeString lexbuf) }
-
-| Character     { LITERAL(LexBuffer<_>.LexemeString lexbuf) }
-| String { LITERAL(LexBuffer<_>.LexemeString lexbuf) }
-
-| CR     { tokenize lexbuf }
-| LF  { tokenize lexbuf }
-| TAB  { tokenize lexbuf }
-| BLK           { tokenize lexbuf }
-| BLANK  { tokenize lexbuf }
-
+| "TRUE" { LITERAL("TRUE") }
+| "FALSE" { LITERAL("FALSE") }
 | Comment { COMMENT(LexBuffer<_>.LexemeString lexbuf) }
+
+| Keyword { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
+| Identifier { IDENTIFIER(LexBuffer<_>.LexemeString lexbuf) }
+| Literal { LITERAL(LexBuffer<_>.LexemeString lexbuf) }
+
 | eof { EOF }

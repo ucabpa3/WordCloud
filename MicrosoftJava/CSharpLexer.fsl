@@ -72,29 +72,6 @@ rule tokenize = parse
 | Delimiter { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
 | Dimension { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
 
-| "=="    { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
-| "<="    { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
-| ">="    { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
-| "!="    { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
-| "||"    { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
-| "&&"    { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
-| "++"    { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
-| "--"    { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
-| ">>"    { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
-| "<<"    { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
-| ">>>"   { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
-| "+="    { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
-| "-="    { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
-| "*="    { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
-| "/="    { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
-| "&="    { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
-| "|="    { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
-| "^="    { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
-| "%="    { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
-| "<<="   { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
-| ">>="   { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
-| ">>>="  { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
-
 | "abstract" { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
 | "event" { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
 | "new" { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
@@ -173,10 +150,15 @@ rule tokenize = parse
 | "#region" { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
 | "#endregion" { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
 | "#if" { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
+| "#else" { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
+| "#elif" { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
 | "#endif" { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
 | "#define" { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
-| "#pragma" { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
+| "#undef" { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
 | "#line" { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
+| "#error" { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
+| "#warning" { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
+| "#pragma" { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
 
 | Identifier { IDENTIFIER(LexBuffer<_>.LexemeString lexbuf) }
 

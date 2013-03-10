@@ -15,7 +15,7 @@ type PublicAPI =
                     match lang with 
                         | TLanguageType.Java -> JavaLexer.tokenize lexbuf
                         | TLanguageType.CSharp -> CSharpLexer.tokenize lexbuf
-                        | TLanguageType.C -> CLexer.tokenize lexbuf
+                        | TLanguageType.C -> CPPLexer.tokenize lexbuf
                         | TLanguageType.CPlusPlus -> CPPLexer.tokenize lexbuf
                         | _ -> JavaLexer.tokenize lexbuf
                 yield y

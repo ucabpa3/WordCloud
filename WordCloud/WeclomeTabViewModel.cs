@@ -10,9 +10,9 @@ namespace WordCloud {
     internal class WelcomeTabViewModel : ObservableObject {
         #region Declarations
 
-        private string sourcePath;
+        private string sourcePath; // = @"C:\Users\vasil.vasilev\Dropbox\UCL\Advanced Analysis and Design A\Project\klee-build-env\klee-uclibc-0.02-x64\test\regex";
         private TokenType selectedWordType;
-        private TLanguageType selectedLanguageType;
+        private TLanguageType selectedLanguageType; // = TLanguageType.C;
 
         private ProjectViewModel parent;
         private RelayCommand browseSourcePathCommand;

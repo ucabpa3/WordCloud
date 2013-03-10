@@ -1,5 +1,0 @@
-C:\Users\MConstantinides\git\WordCloud\MicroMvvm\bin\Debug\MicroMvvm.dll
-C:\Users\MConstantinides\git\WordCloud\MicroMvvm\bin\Debug\MicroMvvm.pdb
-C:\Users\MConstantinides\git\WordCloud\MicroMvvm\obj\Debug\MicroMvvm.csprojResolveAssemblyReference.cache
-C:\Users\MConstantinides\git\WordCloud\MicroMvvm\obj\Debug\MicroMvvm.dll
-C:\Users\MConstantinides\git\WordCloud\MicroMvvm\obj\Debug\MicroMvvm.pdb
