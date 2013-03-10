@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace WordCloud {
     internal class WelcomeTabViewModel : ObservableObject {
@@ -103,6 +104,7 @@ namespace WordCloud {
 
         private void GenerateCloud() {
             parent.SelectedTabNumber = 1;
+            Mouse.OverrideCursor = Cursors.Wait;
             parent.CloudTab.StartWordCloud(SourcePath, selectedWordType, selectedLanguageType);
         }
 

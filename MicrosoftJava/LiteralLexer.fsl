@@ -1,0 +1,23 @@
+﻿{
+module LiteralLexer
+open System
+open Statements
+open Microsoft.FSharp.Text.Lexing
+}
+
+let Separator = ['(' ')' '{' '}' '[' ']' ';' ',' '.']
+let Delimiter = ['=' '>' '<' '!' '~' '?' ':' '+' '-' '*' '/' '&' '|' '^' '%']
+let BLANK = [' ' '\b' '\t' '\\' '\r' '\n'] 
+let literal	= '\"'
+let Word = [^ '(' '"' ')' '{' '}' '[' ']' ';' ',' '.' '=' '>' '<' '!' '~' '?' ':' '+' '-' '*' '/' '&' '|' '^' '%' ' ' '\b' '\t' '\\' '\r' '\n']
+
+rule tokenize = parse
+| Separator { tokenize lexbuf }
+| Delimiter { tokenize lexbuf }
+
+| BLANK  { tokenize lexbuf }
+
+| literal { tokenize lexbuf }
+
+| Word* { LITERALTOKEN(LexBuffer<_>.LexemeString lexbuf) }
+| eof { EO }

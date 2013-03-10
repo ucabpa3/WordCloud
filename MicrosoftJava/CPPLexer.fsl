@@ -21,16 +21,16 @@ let TAB = ['\t']
 let ESCCHR = ['\\']
 let CR = ['\r']
 let LF = ['\n']
-let BLANK = ( SPACE | BLK | TAB | CR | LF | TransferLine )*
-let TransferLine = ESCCHR ( SPACE | BLK | TAB | CR | LF )*
-let AnyButNewLine = [^'\r' '\n']
+let BLANK = ( SPACE | BLK | TAB | CR | LF )*
+let TransferLine = ESCCHR BLANK*
+let AnyButNewLine = [^ '\r' '\n']
 
 let OctEscape1 = ESCCHR OctalDigit
 let OctEscape2 = ESCCHR OctalDigit OctalDigit
 let OctEscape3 = ESCCHR TetraDigit OctalDigit OctalDigit
 let OctEscape =  OctEscape1 | OctEscape2 | OctEscape3 
 
-let Escape = ESCCHR ( 'r' | 'n' | 'a' | 'b' | 'f' | 't' | 'v' | "xff" | '0' | '\\' | '\'' | '\"' )
+let Escape = ESCCHR ( 'r' | 'n' | 'a' | 'b' | 'f' | 't' | 'v' | "xff" | '\\' | '\'' | '\"' )
 let ULetter = Letter 
 let Identifier = ULetter (ULetter | Digit)*
 
@@ -57,10 +57,10 @@ let Float3 = Digit+ ExponentPart FlSuffix?
 let Float4	= Digit+ FlSuffix
 let FloatingPoint = Float1 | Float2 | Float3 | Float4
 
-let AnyChrChr = [^ '\'']
-let AnyStrChr = [^ '\"']
+let AnyChrChr = [^ '\'' '\n' '\r'] 
+let AnyStrChr = [^ '\"' '\n' '\r']
 let Character = '\'' ( Escape | OctEscape | AnyChrChr ) '\''
-let String =  '\"' ( Escape | OctEscape | AnyStrChr )* '\"'
+let String = '\"' ( Escape | OctEscape | AnyStrChr )* '\"'
 let Numeric = ( IntegerLiteral | FloatingPoint )
 let Literal	= ( Numeric | Character | String )
 
@@ -68,11 +68,12 @@ let Keyword = ( "alignas" | "alignof" | "and" | "and_eq" | "asm" | "auto" | "bit
 let PreprocKeyword = ( "include" | "if" | "ifndef" | "ifdef" | "else" | "elif" | "endif" | "define" | "undef" | "line" | "error" | "warning" | "pragma" )
 let Preproc = '#' BLANK* PreprocKeyword
 rule tokenize = parse
-| BLANK*  { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
+| BLANK  { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
 
-| Separator* { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
-| Delimiter* { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
-| Dimension* { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
+| Separator { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
+| Delimiter { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
+| Dimension { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
+| TransferLine { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
 
 | "TRUE" { LITERAL("TRUE") }
 | "FALSE" { LITERAL("FALSE") }
@@ -83,3 +84,4 @@ rule tokenize = parse
 | Literal { LITERAL(LexBuffer<_>.LexemeString lexbuf) }
 
 | eof { EOF }
+

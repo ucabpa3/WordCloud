@@ -21,5 +21,9 @@ namespace WordCloud {
         public CloudTabView() {
             InitializeComponent();
         }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e) {
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
     }
 }

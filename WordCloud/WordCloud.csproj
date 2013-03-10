@@ -105,7 +105,6 @@
     <Compile Include="CloudViewModel.cs" />
     <Compile Include="Cloud\Cloud.cs" />
     <Compile Include="Cloud\CloudGrid.cs" />
-    <Compile Include="SizeHelper.cs" />
     <Compile Include="WelcomeTabView.xaml.cs">
       <DependentUpon>WelcomeTabView.xaml</DependentUpon>
     </Compile>
@@ -145,7 +144,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MouseDoubleClickBehavior.cs" />
     <Compile Include="PocGraphLayout.cs" />
     <Compile Include="ProjectViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
