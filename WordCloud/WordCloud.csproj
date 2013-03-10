@@ -93,9 +93,6 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-    <Reference Include="WPFExtensions">
-      <HintPath>..\Lib\WPFExtensions.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -190,6 +187,10 @@
     <ProjectReference Include="..\MicrosoftJava\MicrosoftJava.fsproj">
       <Project>{ca7c64d1-47a5-4dfe-a2eb-6a55540b6c16}</Project>
       <Name>MicrosoftJava</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WPFExtensions\WPFExtensions.csproj">
+      <Project>{a7915102-8326-4862-96f0-4eb80ed087b4}</Project>
+      <Name>WPFExtensions</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
