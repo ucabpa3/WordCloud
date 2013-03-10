@@ -34,7 +34,6 @@ namespace WordCloud
         double wordWidth;
         string color;
         double opacity;
-        RelayCommand selectWordCommand;
         #endregion
 
         #region Properties

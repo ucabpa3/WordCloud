@@ -104,7 +104,6 @@
     </Compile>
     <Compile Include="CloudViewModel.cs" />
     <Compile Include="Cloud\Cloud.cs" />
-    <Compile Include="Cloud\CloudGrid.cs" />
     <Compile Include="WelcomeTabView.xaml.cs">
       <DependentUpon>WelcomeTabView.xaml</DependentUpon>
     </Compile>
