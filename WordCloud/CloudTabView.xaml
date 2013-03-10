@@ -6,7 +6,7 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:zoom="clr-namespace:WPFExtensions.Controls;assembly=WPFExtensions" 
              mc:Ignorable="d"
-             xmlns:local="clr-namespace:WordCloud"
+             xmlns:local="clr-namespace:WordCloud" Loaded="UserControl_Loaded"
              d:DesignHeight="300" d:DesignWidth="300"
              >
     <local:CloudGrid Margin="10" x:Name="CanvasContainer" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 

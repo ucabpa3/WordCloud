@@ -27,7 +27,13 @@ type PublicAPI =
                 match t with
                     | IDENTIFIER(name) -> yield new Word(TokenType.Identifier, name, 1)
                     | KEYWORD(name) -> yield new Word(TokenType.Keyword, name, 1)
-                    | LITERAL(name) -> yield new Word(TokenType.Literal, name, 1)
+                    | LITERAL(name) -> 
+                                            let lexbuf = Lexing.LexBuffer<char>.FromString name
+                                            while not lexbuf.IsPastEndOfStream do
+                                                let y = LiteralLexer.tokenize lexbuf
+                                                match y with
+                                                    | LITERALTOKEN(name1) -> yield new Word(TokenType.Literal, name1, 1)
+                                                    | EO -> ()
                     | COMMENT(name) -> 
                                             let lexbuf = Lexing.LexBuffer<char>.FromString name
                                             while not lexbuf.IsPastEndOfStream do

@@ -109,7 +109,7 @@ namespace SilverlightWordle {
         internal System.Windows.Shapes.Path Path_3;
 
 #line default
-#line hidden
+#line hidden 
 
 
 #line 17 "..\..\..\AnimationWheel\AnimationWheel.xaml"
@@ -229,7 +229,7 @@ namespace SilverlightWordle {
         }
 
         [System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "4.0.0.0")]
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks" + '"', "4.0.0.0")]
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes")]
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
