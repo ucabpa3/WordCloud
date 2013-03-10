@@ -7,7 +7,7 @@ namespace MicrosoftJava.Test {
     [TestClass]
     public class LexerTest {
         private readonly string CSharpTestPath = @"CSharpTestCode.cs";
-        private readonly string CTestPath = @"C:\Users\vasil.vasilev\Dropbox\UCL\Advanced Analysis and Design A\Project\klee-build-env\klee-uclibc-0.02-x64\libpthread\linuxthreads\sysdeps\mips\tls.h";
+        private readonly string CTestPath = @"CPPTest.cpp";
 
         [TestMethod]
         public void TestCSharpLexer() {
