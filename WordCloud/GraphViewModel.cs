@@ -22,7 +22,7 @@ namespace WordCloud
         #region Members
 
         private string layoutAlgorithmType;
-        private PocGraph graph = new PocGraph(true);
+        private PocGraph graph;
         private List<PocVertex> existingVertices = new List<PocVertex>();
         private List<String> layoutAlgorithmTypes = new List<string>();
         private ProjectViewModel parent;
@@ -42,6 +42,8 @@ namespace WordCloud
 
         public void RunGraph(string startWord, List<Word> wordList)
         {
+            Graph = new PocGraph(true);
+            existingVertices.Clear();
 
             this.wordList = wordList;
             var qualifiedWords = EditDistance.GetShortestLevenshtein(startWord, wordList.Select(w => w.Name).ToList());
@@ -116,8 +118,15 @@ namespace WordCloud
 
         public PocGraph Graph
         {
-            get { return graph; }
-            set { graph = value; }
+            get { 
+                return graph; 
+            }
+            set { 
+                if (this.graph == value) return;
+                this.graph = value; 
+
+                RaisePropertyChanged("Graph");
+            }
         }
         #endregion
 
@@ -127,42 +136,19 @@ namespace WordCloud
 
         void GraphTextBlockClickExecute(object parameter)
         {
-            TextBlock clickedItem = parameter as TextBlock;
-
-            int pos = 0;
             int prevItemsCount = existingVertices.Count;
+            PocVertex newRoot = (parameter as PocVertex);
 
+            if ( Graph.Edges.Any(e => e.Source == newRoot) ) return;
 
- 
-
-            var qualifiedWords = EditDistance.GetShortestLevenshtein(clickedItem.Text, wordList.Select(w => w.Name).ToList());
-
-            for (int i = 0; i < existingVertices.Count; i++)
-            {
-                if (existingVertices[i].word.Equals(clickedItem.Text))
-                    pos = i;
-                
-            }
-
-            if (pos == 0)
-                return;
-
+            var qualifiedWords = EditDistance.GetShortestLevenshtein(newRoot.word, wordList.Select(w => w.Name).ToList());
 
             foreach (KeyValuePair<string, int> w in qualifiedWords)
             {
-                existingVertices.Add(new PocVertex(prevItemsCount, w.Key, w.Value));
-            }
-
-            foreach (PocVertex vertex in existingVertices)
-                graph.AddVertex(vertex);
-
-
-            
-
-            //add some edges to the graph
-            for (int i = 0; i < qualifiedWords.Count; i++)
-            {
-                AddNewGraphEdge(existingVertices[pos], existingVertices[prevItemsCount + i]);
+                var tmpVertex = new PocVertex(prevItemsCount++, w.Key, w.Value);
+                existingVertices.Add(tmpVertex);
+                graph.AddVertex(tmpVertex);
+                AddNewGraphEdge(newRoot, tmpVertex);
             }
         }
 

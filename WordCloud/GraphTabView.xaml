@@ -21,7 +21,7 @@
                     <StackPanel Orientation="Horizontal" Margin="5">
                         <TextBlock Text="{Binding Path=word, Mode=OneWay}" Foreground="White">
                             <TextBlock.InputBindings>
-                                <MouseBinding Command="{Binding DataContext.GraphTextBlockClick,ElementName=CanvasGraph}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type TextBlock}}}" MouseAction="LeftClick" />
+                                <MouseBinding Command="{Binding DataContext.GraphTextBlockClick,ElementName=CanvasGraph}" CommandParameter="{Binding Path=DataContext, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type TextBlock}}}" MouseAction="LeftClick" />
                             </TextBlock.InputBindings>
                         </TextBlock>
                     </StackPanel>
@@ -82,7 +82,7 @@
 
             <zoom:ZoomControl Grid.Row="1" Zoom="0.2" ZoomBoxOpacity="0.5" Background="#ff656565">
                 <local:PocGraphLayout x:Name="graphLayout" Margin="10"
-						            Graph="{Binding Path=Graph}"
+						            Graph="{Binding Path=Graph, UpdateSourceTrigger=PropertyChanged}"
 						            LayoutAlgorithmType="{Binding Path=LayoutAlgorithmType, Mode=OneWay}"
 						            OverlapRemovalAlgorithmType="FSA"
 						            HighlightAlgorithmType="Simple" />
