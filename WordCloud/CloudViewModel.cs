@@ -82,7 +82,7 @@ namespace WordCloud {
 
             if (wordsList.Count == 0) return;
 
-            Cloud c = new Cloud(800, 800);
+            Cloud c = new Cloud();
             //Cloud c = new Cloud(Convert.ToInt32(CanvasHeight), Convert.ToInt32(CanvasWidth));
             c.CreateCloud(wordsList);
             Elements = c.Holder;
