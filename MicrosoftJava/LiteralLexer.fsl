@@ -8,7 +8,7 @@ open Microsoft.FSharp.Text.Lexing
 let Separator = ['(' ')' '{' '}' '[' ']' ';' ',' '.']
 let Delimiter = ['=' '>' '<' '!' '~' '?' ':' '+' '-' '*' '/' '&' '|' '^' '%']
 let BLANK = [' ' '\b' '\t' '\\' '\r' '\n'] 
-let literal	= "\""
+let literal	= '\"'
 let Word = [^ '(' '"' ')' '{' '}' '[' ']' ';' ',' '.' '=' '>' '<' '!' '~' '?' ':' '+' '-' '*' '/' '&' '|' '^' '%' ' ' '\b' '\t' '\\' '\r' '\n']
 
 rule tokenize = parse
