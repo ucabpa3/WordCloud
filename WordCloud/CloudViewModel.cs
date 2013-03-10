@@ -78,7 +78,7 @@ namespace WordCloud {
                            group w by new { w.Type, w.Name } into g
                            select new Word(g.Key.Type, g.Key.Name, g.Count());
 
-            wordsList = wl.Where(w => w.Type == wordType).ToList();
+            wordsList = wl.Where(w => w.Type == wordType).OrderByDescending(w => w.Count).ToList();
 
             if (wordsList.Count == 0) return;
 
