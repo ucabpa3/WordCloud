@@ -85,7 +85,7 @@ namespace WordCloud
                         fontSize -= font_step;
                         opacity = 1.0;
                     }
-                    if (d[i].Count != prev_occ && opacity > 0.1) { opacity -= 0.1; }
+                    if (d[i].Count != prev_occ && opacity > 0.1) { opacity -= 0.1; if (opacity < 0.1) { opacity = 0.1; } }
                 }
                 else 
                 {
@@ -96,14 +96,16 @@ namespace WordCloud
                     }
                 }
                
-                double lineHeight = Math.Ceiling(fontSize * fontFamily.LineSpacing + fontFamily.LineSpacing) - 4;
+                double lineHeight = Math.Ceiling(fontSize * fontFamily.LineSpacing + fontFamily.LineSpacing);
                 FormattedText dum = new FormattedText(d[i].Name,
                                                 System.Globalization.CultureInfo.GetCultureInfo("en-us"),
                                                 FlowDirection.LeftToRight,
                                                 new Typeface("Verdana"), fontSize, Brushes.Black);
 
                 double wordWidth = dum.Width - 4;
-                int x = rad.Next(CanvasWidth/4, CanvasWidth/2 - CanvasWidth/4);
+                int x;
+                if (d.Count > 200) { x = rad.Next(CanvasWidth / 8, CanvasWidth  - CanvasWidth / 8); }
+                else  x = rad.Next(CanvasWidth/4, CanvasWidth/2 - CanvasWidth/4);
                 int y = Convert.ToInt32(CanvasHeight / 2 -  lineHeight);
 
                 ResolveCollisions(ref x, ref y, ref lineHeight, ref wordWidth);
@@ -128,7 +130,7 @@ namespace WordCloud
 
         private void ResolveCollisions(ref int x, ref int y, ref  double fontHeight, ref double wordWidth)
         {
-            double t = 0.01;
+            double t = 0.2;
             bool alt = false;
             Random rad = new Random();
             Random d = new Random();
@@ -164,7 +166,7 @@ namespace WordCloud
                         y = Convert.ToInt32(CanvasHeight / 2 - fontHeight);
                     }
                 }*/
-                t = t + 0.01;
+                t = t + 0.2;
             }
 
         }
