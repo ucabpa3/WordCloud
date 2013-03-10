@@ -70,29 +70,6 @@ rule tokenize = parse
 | Delimiter { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
 | Dimension { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
 
-| "=="    { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
-| "<="    { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
-| ">="    { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
-| "!="    { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
-| "||"    { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
-| "&&"    { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
-| "++"    { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
-| "--"    { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
-| ">>"    { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
-| "<<"    { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
-| ">>>"   { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
-| "+="    { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
-| "-="    { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
-| "*="    { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
-| "/="    { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
-| "&="    { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
-| "|="    { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
-| "^="    { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
-| "%="    { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
-| "<<="   { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
-| ">>="   { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
-| ">>>="  { DONTCARE(LexBuffer<_>.LexemeString lexbuf) }
-
 | "abstract"       { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
 | "do"             { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
 | "implements"  { KEYWORD(LexBuffer<_>.LexemeString lexbuf) }
