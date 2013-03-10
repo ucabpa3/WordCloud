@@ -18,7 +18,7 @@ namespace WordCloud
             maxFontSize = 62;
             minFontSize = 12;
             CanvasHeight = 800;
-            CanvasWidth = 2600;
+            CanvasWidth = 1300;
         }
         public Cloud(int CanvasH, int CanvasW)
         {
@@ -58,7 +58,7 @@ namespace WordCloud
             int fontSize = maxFontSize;          
             int font_groups = maxFontSize - minFontSize;
             int n_words_in_groups = d.Count / font_groups;
-            int top_words = d.Count - n_words_in_groups * font_groups;
+            int top_words = d.Count % font_groups;
             string color = setColor(rad);
             
 
@@ -103,9 +103,9 @@ namespace WordCloud
                                                 new Typeface("Verdana"), fontSize, Brushes.Black);
 
                 double wordWidth = dum.Width - 4;
-                int x;
+                int x = CanvasWidth / 2;
                 if (d.Count > 200) { x = rad.Next(CanvasWidth / 8, CanvasWidth  - CanvasWidth / 8); }
-                else  x = rad.Next(CanvasWidth/4, CanvasWidth/2 - CanvasWidth/4);
+                //else  x = rad.Next(CanvasWidth/4, CanvasWidth - CanvasWidth/4);
                 int y = Convert.ToInt32(CanvasHeight / 2 -  lineHeight);
 
                 ResolveCollisions(ref x, ref y, ref lineHeight, ref wordWidth);
@@ -130,7 +130,8 @@ namespace WordCloud
 
         private void ResolveCollisions(ref int x, ref int y, ref  double fontHeight, ref double wordWidth)
         {
-            double t = 0.2;
+            double step = 1.557;
+            double t = step;
             bool alt = false;
             Random rad = new Random();
             Random d = new Random();
@@ -166,74 +167,18 @@ namespace WordCloud
                         y = Convert.ToInt32(CanvasHeight / 2 - fontHeight);
                     }
                 }*/
-                t = t + 0.2;
+                t += step;
             }
 
         }
         private bool DetectCollisions(ref int x, ref int y, double fontHeight, double wordWidth)
         {
-
             for (int i = 0; i < holder.Count; i++)
             {
-                 
-                if (((x >= holder[i].PosX) && (x <= (holder[i].PosX + holder[i].WordWidth))) && ((y >= holder[i].PosY) && (y <= (holder[i].LineHeight + holder[i].PosY))))
-                {
-
+                if (!( x + wordWidth < holder[i].PosX || y + fontHeight < holder[i].PosY || x > holder[i].PosX + holder[i].WordWidth || y > holder[i].PosY + holder[i].LineHeight ))
                     return true;
-                }
-                //(x+ww,y)
-                if ((((x + wordWidth) >= holder[i].PosX) && ((x + wordWidth) <= (holder[i].PosX + holder[i].WordWidth))) && ((y >= holder[i].PosY) && (y <= (holder[i].LineHeight + holder[i].PosY))))
-                {
-
-                    return true;
-                }
-                //(x,y+lh)
-                if (((x >= holder[i].PosX) && (x <= (holder[i].PosX + holder[i].WordWidth))) && (((y + fontHeight) >= holder[i].PosY) && ((y + fontHeight) <= (holder[i].LineHeight + holder[i].PosY))))
-                {
-
-                    return true;
-                }
-                //(x+wW, y+lH)
-                if ((((x + wordWidth) >= holder[i].PosX) && ((x + wordWidth) <= (holder[i].PosX + holder[i].WordWidth))) && (((y + fontHeight) >= holder[i].PosY) && ((y + fontHeight) <= (holder[i].LineHeight + holder[i].PosY))))
-                {
-
-                    return true;
-                }
-                //center
-                if ((((x + wordWidth / 2) >= holder[i].PosX) && ((x + wordWidth / 2) <= (holder[i].PosX + holder[i].WordWidth))) && (((y + fontHeight / 2) >= holder[i].PosY) && ((y + fontHeight / 2) <= (holder[i].LineHeight + holder[i].PosY))))
-                {
-
-                    return true;
-                }
-                //Case: current word inserting bigger than the others
-                if (((x <= holder[i].PosX) && (x + wordWidth >= holder[i].PosX)) && ((y <= holder[i].PosY) && ((y + fontHeight) >= holder[i].PosY)))
-                {
-                    return true;
-                }
-                //(x+ww,y)
-                if (((x <= holder[i].PosX + holder[i].WordWidth) && ((x + wordWidth) >= (holder[i].PosX + holder[i].WordWidth))) && ((y <= holder[i].PosY) && (y + fontHeight >= holder[i].PosY)))
-                {
-
-                    return true;
-                }
-                //(x,y+lh)
-                if (((x <= holder[i].PosX) && (x + wordWidth >= holder[i].PosX)) && ((y <= holder[i].PosY + holder[i].LineHeight) && ((y + fontHeight) >= (holder[i].LineHeight + holder[i].PosY))))
-                {
-                    return true;
-                }
-                //(x+wW, y+lH)
-                if (((x <= holder[i].PosX + holder[i].WordWidth) && ((x + wordWidth) >= (holder[i].PosX + holder[i].WordWidth))) && ((y <= holder[i].PosY + holder[i].LineHeight) && ((y + fontHeight) >= (holder[i].LineHeight + holder[i].PosY))))
-                {
-                    return true;
-                }
-                if (((x <= holder[i].PosX + holder[i].WordWidth / 2) && (x + wordWidth >= (holder[i].PosX + holder[i].WordWidth / 2))) && ((y <= holder[i].PosY + holder[i].LineHeight / 2) && ((y + fontHeight) >= (holder[i].LineHeight / 2 + holder[i].PosY))))
-                {
-
-                    return true;
-                }
-
             }
-
+            
             return false;
         }
 
