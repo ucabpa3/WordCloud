@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:zoom="clr-namespace:WPFExtensions.Controls;assembly=WPFExtensions" 
              mc:Ignorable="d"
              xmlns:local="clr-namespace:WordCloud"
              d:DesignHeight="300" d:DesignWidth="300"
@@ -13,7 +14,9 @@
                      CanvasWidth="{Binding DataContext.CanvasWidth, Mode=OneWayToSource, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:CloudTabView}}}">
         <!--<Controls:ProgressRing x:Name="WordCloudLoading" IsActive="True" />-->
         <Border BorderBrush="LightGray"  BorderThickness="1" CornerRadius="5" >
-            <ItemsControl ItemsSource="{Binding Path=Elements}" Margin="-1,-1,1,-1" VerticalAlignment="Top">
+            <zoom:ZoomControl MinZoom="0.1"  MaxZoom="1">
+            <Grid>            
+            <ItemsControl ItemsSource="{Binding Path=Elements}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding Path=Content}"  FontFamily="Segoe WP" Opacity="{Binding Path=Opacity}"  FontSize="{Binding Path=FontSize}"  >
@@ -42,6 +45,8 @@
                     </Style>
                 </ItemsControl.ItemContainerStyle>
             </ItemsControl>
+            </Grid>
+            </zoom:ZoomControl>
         </Border>
     </local:CloudGrid>
 </UserControl>
