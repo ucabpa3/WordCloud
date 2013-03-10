@@ -14,15 +14,15 @@ namespace WordCloud
         #region Construction
         public Cloud()
         {
-            fontFamily = new FontFamily("Square721 BT");
-            maxFontSize = 120;
-            minFontSize = 8;
-            CanvasHeight = 460;
-            CanvasWidth = 380;
+            fontFamily = new FontFamily("Verdana");
+            maxFontSize = 62;
+            minFontSize = 12;
+            CanvasHeight = 800;
+            CanvasWidth = 2600;
         }
         public Cloud(int CanvasH, int CanvasW)
         {
-            fontFamily = new FontFamily("Square721 BT");
+            fontFamily = new FontFamily("Verdana");
             maxFontSize = 62;
             minFontSize = 12;
             CanvasHeight = CanvasH;
@@ -96,14 +96,14 @@ namespace WordCloud
                     }
                 }
                
-                double lineHeight = Math.Ceiling(fontSize * fontFamily.LineSpacing + fontFamily.LineSpacing) - 7;
+                double lineHeight = Math.Ceiling(fontSize * fontFamily.LineSpacing + fontFamily.LineSpacing) - 4;
                 FormattedText dum = new FormattedText(d[i].Name,
                                                 System.Globalization.CultureInfo.GetCultureInfo("en-us"),
                                                 FlowDirection.LeftToRight,
                                                 new Typeface("Verdana"), fontSize, Brushes.Black);
 
-                double wordWidth = dum.Width - 7;
-                int x = rad.Next(0, CanvasWidth - Convert.ToInt32(wordWidth));
+                double wordWidth = dum.Width - 4;
+                int x = rad.Next(CanvasWidth/4, CanvasWidth/2 - CanvasWidth/4);
                 int y = Convert.ToInt32(CanvasHeight / 2 -  lineHeight);
 
                 ResolveCollisions(ref x, ref y, ref lineHeight, ref wordWidth);
@@ -136,7 +136,7 @@ namespace WordCloud
 
             prev_x.Add(x);
 
-            while (DetectCollisions(ref x, ref y, fontHeight, wordWidth) || x<0 || y<0 || x+Convert.ToInt32(wordWidth)>CanvasWidth || y+Convert.ToInt32(fontHeight) > CanvasHeight)
+            while (DetectCollisions(ref x, ref y, fontHeight, wordWidth)) //|| x<0 || y<0 || x+Convert.ToInt32(wordWidth)>CanvasWidth || y+Convert.ToInt32(fontHeight) > CanvasHeight)
             {
 
                 if (alt)
@@ -155,7 +155,7 @@ namespace WordCloud
 
                 prev_x.Add(x);
 
-                if (x < 0 || y < 0 || x + Convert.ToInt32(wordWidth) > CanvasWidth || y + Convert.ToInt32(fontHeight) > CanvasHeight)
+               /* if (x < 0 || y < 0 || x + Convert.ToInt32(wordWidth) > CanvasWidth || y + Convert.ToInt32(fontHeight) > CanvasHeight)
                 {
 
                     while (!prev_x.Contains(x))
@@ -163,7 +163,7 @@ namespace WordCloud
                         x = rad.Next(0, CanvasWidth - Convert.ToInt32(wordWidth));
                         y = Convert.ToInt32(CanvasHeight / 2 - fontHeight);
                     }
-                }
+                }*/
                 t = t + 0.01;
             }
 
