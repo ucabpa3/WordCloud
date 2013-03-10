@@ -57,10 +57,6 @@
       <OtherFlags>--unicode</OtherFlags>
     </FsLex>
     <Compile Include="CSharpLexer.fs" />
-    <FsLex Include="CLexer.fsl">
-      <OtherFlags>--unicode</OtherFlags>
-    </FsLex>
-    <Compile Include="CLexer.fs" />
     <FsLex Include="CPPLexer.fsl">
       <OtherFlags>--unicode</OtherFlags>
     </FsLex>
